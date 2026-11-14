@@ -19,10 +19,10 @@
     "highcharts": "^13.1.1",
     "qrcode": "^1.5.4",
     "svelte": "^5.57.2",
-    "tippy.js": "^6.3.7"
+    "tippy.js": "^6.3.7",
+    "esm-env": "^1.2.2"
   },
   "private": true,
-
   "scripts": {
     "build": "vite build && vite build --ssr"
   },

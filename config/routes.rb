@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   inertia "/" => "welcome"
 
+  resources :users
   resource :genesis
 
   # Defines the root path route ("/")
