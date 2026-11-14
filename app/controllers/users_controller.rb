@@ -5,6 +5,11 @@ class UsersController < ApplicationController
     render inertia: "welcome", props: { signedup: true }
   end
 
+  def show
+    user = User.find_by(handle: params[:handle])
+    @user = user.as_json(User::PUBLIC_JSON)
+  end
+
   private
 
   def user_params

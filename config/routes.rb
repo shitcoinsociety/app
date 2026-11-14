@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :users
   resource :genesis
 
+  get "@:handle" => "users#show", as: :user_handle
+
   # Defines the root path route ("/")
   # root "posts#index"
 end

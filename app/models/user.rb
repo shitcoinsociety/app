@@ -1,6 +1,13 @@
 class User < ApplicationRecord
+  PUBLIC_JSON = {
+    only: [ :id, :name, :handle, :bio, :website, :created_at ],
+    include: {
+      profile_image: {}
+    }
+  }
+
   has_secure_password
-  
+
   has_one_attached :profile_image
 
   after_create_commit :save_in_mailchimp
@@ -22,5 +29,4 @@ class User < ApplicationRecord
       }
     )
   end
-
 end
