@@ -4,3 +4,11 @@ buhrmi = User.where(handle: "buhrmi").first_or_create!(
   name: "Stefan Buhrmester",
   bio: "It's better to be wrong about everything than to be right about nothing."
 )
+
+unless buhrmi.profile_image.attached?
+  buhrmi.profile_image.attach(
+    io: File.open(Rails.root.join("db/seeds/buhrmi.jpg")),
+    filename: "buhrmi.jpg",
+    content_type: "image/jpeg"
+  )
+end

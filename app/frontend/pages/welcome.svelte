@@ -30,11 +30,11 @@
   <title>Shitcoin Society</title>
 </svelte:head>
 
-<h1>Creating the future that works for everyone. Day by day.</h1>
+<h1>Towards a future that works for everyone. Day by day.</h1>
 <img src={"/tothemoon.jpg"} alt="To the moon" class="mt-4" />
 
 <p class="mt-4">
-  We are an open-source, crypto-native MLM community developing our very own decentralized ledger infrastructure.
+  We are an open-source, crypto-native MLM community developing our very own decentralized ledger technology.
   Everybody is welcome to join.
 </p>
 
@@ -43,7 +43,7 @@
 <h2>Start your journey - it's free</h2>
 
 {#if signedup}
-  <p>Thank you for signing up! We'll send you more information soon.</p>
+  <p>Thank you for signing up! More info will be on your way soon.</p>
 {:else}
   <input type="email" placeholder="Your email address" bind:value={form.email} />
   <button class="btn mt-2" onclick={() => form.post("/users")}>Sign up</button>

@@ -2,6 +2,7 @@
   --color-background: #161618;
   --color-text: #ffffff;
   --color-link: #1e90ff;
+  --color-border: #333333;
 
   background-color: var(--color-background);
   color: var(--color-text);
@@ -11,9 +12,9 @@
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
-    "header"
-    "main"
-    "footer";
+    "header header header"
+    "menu main aside"
+    "footer footer footer";
   height: 100vh;
 }
 
