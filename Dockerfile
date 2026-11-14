@@ -50,8 +50,6 @@ RUN bundle install && \
 # --- STAGE 4: Build JS Assets ---
 FROM base AS assets-builder
 COPY --link package.json bun.lock ./
-# Workspace manifests must be present before install, or bun cannot resolve workspace:*
-COPY --link packages/inertiax-viewstack/package.json ./packages/inertiax-viewstack/package.json
 RUN bun install --frozen-lockfile
 
 COPY --link . .
