@@ -1,0 +1,40 @@
+:root {
+  --color-background: #000000;
+  --color-text: #ffffff;
+  --color-link: #1e90ff;
+
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+#app {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+  height: 100vh;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+header {
+  grid-area: header;
+}
+
+main {
+  grid-area: main;
+}
+
+footer {
+  grid-area: footer;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}

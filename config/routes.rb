@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   inertia "/" => "welcome"
 
+  resource :genesis
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
