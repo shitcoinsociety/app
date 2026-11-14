@@ -8,13 +8,13 @@
 </svelte:head>
 
 <header>
-  <div class="py-4 container supersonic">
-    <h1 class="text-2xl">Shitcoin Society</h1>
+  <div class="pt-12 container supersonic">
+    <h1 class="text-4xl">Shitcoin Society</h1>
   </div>
 </header>
 
 <main>
-  <div class="container py-4">
+  <div class="container ">
     {@render children()}
   </div>
 </main>
