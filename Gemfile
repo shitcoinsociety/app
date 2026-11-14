@@ -7,8 +7,6 @@ gem "rails", "~> 8.1.4", ">= 8.1.4.1"
 gem "sqlite3", ">= 2.1"
 gem "pg", "~> 1.7"
 
-# Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
@@ -52,7 +50,11 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  # Use the Puma web server [https://github.com/puma/puma]
+  gem "puma", ">= 5.0"
 end
 
 gem "inertia_rails", "~> 3.23"
 gem "vite_rails", "~> 3.11"
+
+gem "itsi", "~> 0.2.27"
