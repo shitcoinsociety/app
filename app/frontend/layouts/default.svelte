@@ -22,6 +22,8 @@
 <footer class="container p-4">
   &copy; {new Date().getFullYear()} Shitcoin Society. All rights reserved. <br />
   <a href="/genesis.json" target="_blank" rel="noopener noreferrer">Download genesis.json</a>
+  &middot;
+  <a href="https://youtube.com/@shitcoinsociety" target="_blank" rel="noopener noreferrer">YouTube</a>
 </footer>
 
 

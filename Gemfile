@@ -59,3 +59,7 @@ gem "vite_rails", "~> 3.11"
 gem "itsi", "~> 0.2.27"
 
 gem "gibbon", "~> 4.1"
+
+gem "letter_opener", "~> 1.10"
+
+gem "mailgun-ruby", "~> 1.4"
