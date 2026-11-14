@@ -188,9 +188,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_14_184747) do
   create_table "users", force: :cascade do |t|
     t.citext "email", null: false
     t.string "password_digest", null: false
+    t.citext "handle"
+    t.string "name"
+    t.string "bio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["handle"], name: "index_users_on_handle", unique: true
   end
 
   add_foreign_key "solid_queue_batch_executions", "solid_queue_batches", column: "batch_id", on_delete: :cascade

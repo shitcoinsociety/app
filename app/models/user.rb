@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
+  
+  has_one_attached :profile_image
 
   after_create_commit :save_in_mailchimp
   before_validation :ensure_password, on: :create
