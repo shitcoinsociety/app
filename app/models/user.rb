@@ -14,6 +14,8 @@ class User < ApplicationRecord
   after_create_commit :send_welcome_email
   before_validation :ensure_password, on: :create
 
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+
   private
 
   def ensure_password
