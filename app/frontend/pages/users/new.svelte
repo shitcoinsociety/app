@@ -37,13 +37,12 @@
 <img src={"/tothemoon.jpg"} alt="To the moon" class="mt-4" />
 
 <p class="mt-4">
-  We are an <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">open-source</a> crypto-native MLM community developing our very own decentralized ledger technology.
+  The Shitcoin Society is a crypto-native <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">open source</a> investment platform developing its very own decentralized ledger technology.
   Everybody is welcome to join. We have coconuts and drum n bass.
 </p>
 
 <h2>Launch progress</h2>
 <p>The genesis block is {ico_progress}% complete.
-
   <a href="/genesis.json" target="_blank" rel="noopener noreferrer">Download snapshot</a>
 </p>
 <div class="meter-wrap">
@@ -69,6 +68,7 @@
   .meter-wrap {
     position: relative;
     padding-bottom: 2rem;
+    margin-top: 1rem;
   }
   .progress-meter {
     display: block;
