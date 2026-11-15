@@ -19,10 +19,12 @@
   </div>
 </main>
 
-<footer class="container p-4">
+<footer class="container py-4">
   &copy; {new Date().getFullYear()} Shitcoin Society 
   &middot;
   <a href="https://youtube.com/@shitcoinsociety" target="_blank" rel="noopener noreferrer">YouTube</a>
+  &middot;
+  <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">GitHub</a>
 </footer>
 
 

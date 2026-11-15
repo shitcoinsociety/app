@@ -33,55 +33,129 @@
   <title>Shitcoin Society</title>
 </svelte:head>
 
-<h1>Towards a future that works for everyone. Day by day.</h1>
 
-<p>The genesis block is {ico_progress}% completed. <a href="/genesis.json" target="_blank" rel="noopener noreferrer">Download snapshot</a>.</p>
-
-<img src={"/tothemoon.jpg"} alt="To the moon" class="mt-4" />
-
+<h1 class="mb-4">Building a future that works for everyone. Day by day.</h1>
+  <img src={"/tothemoon.jpg"} alt="To the moon" class="mt-4" />
 <p class="mt-4">
-  We are an open-source, crypto-native MLM community developing our very own decentralized ledger technology.
+  We are an <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">open-source</a> crypto-native MLM community developing our very own decentralized ledger technology.
   Everybody is welcome to join.
 </p>
 
-<p class="mt-4">Visit our <a href="https://github.com/shitcoinsociety">GitHub organization</a> for more information and an overview of our repositories.</p>
+<h2>Launch progress</h2>
+<p class="my-2">The genesis block is {ico_progress}% complete.
 
+  <a href="/genesis.json" target="_blank" rel="noopener noreferrer">Download snapshot</a>
+</p>
+<div class="meter-wrap">
+  <progress class="progress-meter" value={ico_progress} max="100" aria-label="Genesis block completion">
+    {ico_progress}%
+  </progress>
+  <span class="progress-marker" style={`left: ${ico_progress}%`} aria-hidden="true"></span>
+  <span class="progress-current" style={`left: ${ico_progress}%`}>{ico_progress}%</span>
+</div>
 
-
-<h2>Start your journey - it's free</h2>
-
+<h2>Join us - it's free</h2>
 {#if signedup}
   <p>Thank you for signing up! More info will be on your way soon.</p>
 {:else}
-  <input type="email" placeholder="Your email address" bind:value={form.email} />
-  <button class="btn mt-2" onclick={() => form.post("/users")}>Sign up</button>
+  <div class="signup-actions">
+    <input type="email" placeholder="Your email address" bind:value={form.email} />
+    <button class="btn" onclick={() => form.post("/users")}>Sign up</button>
+  </div>
 {/if}
 
+
 <style>
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    background-color: #4f46e5;
-    color: white;
-    border: none;
-    border-radius: 0.375rem;
-    cursor: pointer;
+  .meter-wrap {
+    position: relative;
+    padding-bottom: 2rem;
+  }
+  .progress-meter {
+    display: block;
+    width: 100%;
+    height: 1.25rem;
+    margin: 0;
+    overflow: hidden;
+    appearance: none;
+    background: #393943;
+    border: 0;
+    border-radius: 999px;
+  }
+  .progress-meter::-webkit-progress-bar {
+    background: #393943;
+    border-radius: 999px;
+  }
+  .progress-meter::-webkit-progress-value {
+    background: linear-gradient(90deg, #6366f1, #c084fc);
+    border-radius: 999px;
+    transition: width 300ms ease;
+  }
+  .progress-meter::-moz-progress-bar {
+    background: linear-gradient(90deg, #6366f1, #c084fc);
+    border-radius: 999px;
+  }
+  .progress-marker {
+    position: absolute;
+    top: 0.625rem;
+    width: 1rem;
+    height: 1rem;
+    box-sizing: border-box;
+    background: white;
+    border: 3px solid #a78bfa;
+    border-radius: 50%;
+    transform: translate(0%, -50%);
+  }
+  .progress-current {
+    position: absolute;
+    top: 1.75rem;
+    color: #c4b5fd;
+    font-weight: 700;
+    white-space: nowrap;
+    transform: translateX(0%);
   }
   h1 {
     font-size: 1.4rem;
     font-weight: bold;
   }
   h2 {
-    margin-top: 1rem;
+    margin-top: 2rem;
     font-size: 1.2rem;
     font-weight: bold;
   }
+  .signup-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+  }
   input {
+    box-sizing: border-box;
     padding: 0.5rem;
     border: 1px solid #d1d5db;
     border-radius: 0.375rem;
     width: 100%;
-    max-width: 300px;
+    max-width: 320px;
+  }
+
+  @media (max-width: 480px) {
+    .signup-actions {
+      flex-direction: column;
+    }
+    input {
+      max-width: none;
+    }
   }
 </style>
