@@ -38,7 +38,7 @@
 
 <p class="mt-4">
   We are an <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">open-source</a> crypto-native MLM community developing our very own decentralized ledger technology.
-  Everybody is welcome to join.
+  Everybody is welcome to join. There will be drum n bass.
 </p>
 
 <h2>Launch progress</h2>
