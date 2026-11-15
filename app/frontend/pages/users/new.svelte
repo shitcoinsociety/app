@@ -34,15 +34,15 @@
 </svelte:head>
 
 
-<h1 class="mb-4">Building a future that works for everyone. Day by day.</h1>
-  <img src={"/tothemoon.jpg"} alt="To the moon" class="mt-4" />
+<img src={"/tothemoon.jpg"} alt="To the moon" class="mt-4" />
+
 <p class="mt-4">
   We are an <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">open-source</a> crypto-native MLM community developing our very own decentralized ledger technology.
   Everybody is welcome to join.
 </p>
 
 <h2>Launch progress</h2>
-<p class="my-2">The genesis block is {ico_progress}% complete.
+<p>The genesis block is {ico_progress}% complete.
 
   <a href="/genesis.json" target="_blank" rel="noopener noreferrer">Download snapshot</a>
 </p>
@@ -126,7 +126,7 @@
     display: flex;
     justify-content: flex-start;
     gap: 0.75rem;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
   }
   .btn {
     display: inline-flex;

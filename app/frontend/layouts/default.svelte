@@ -8,8 +8,8 @@
 </svelte:head>
 
 <header>
-  <div class="p-4 supersonic">
-    <h1 class="text-3xl">Shitcoin Society</h1>
+  <div class="pt-6 supersonic container">
+    <h1 class="text-4xl">Shitcoin Society</h1>
   </div>
 </header>
 
@@ -35,7 +35,7 @@
   }
 
   header {
-    border-bottom: 1px solid var(--color-border);
+    /* border-bottom: 1px solid var(--color-border); */
   }
 
   .supersonic {
