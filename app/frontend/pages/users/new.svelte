@@ -3,7 +3,10 @@
 
   const form = useForm({ email: "" })
 
-  const { signedup } = $props()
+  const { 
+    signedup,
+    ico_progress
+  } = $props()
 
   // 1. Discover all installed extensions via EIP-6963
   const wallets = $state([]);
@@ -31,6 +34,9 @@
 </svelte:head>
 
 <h1>Towards a future that works for everyone. Day by day.</h1>
+
+<p>The genesis block is {ico_progress}% completed. <a href="/genesis.json" target="_blank" rel="noopener noreferrer">Download snapshot</a>.</p>
+
 <img src={"/tothemoon.jpg"} alt="To the moon" class="mt-4" />
 
 <p class="mt-4">
@@ -39,6 +45,8 @@
 </p>
 
 <p class="mt-4">Visit our <a href="https://github.com/shitcoinsociety">GitHub organization</a> for more information and an overview of our repositories.</p>
+
+
 
 <h2>Start your journey - it's free</h2>
 
