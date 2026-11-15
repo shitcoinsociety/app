@@ -7,8 +7,8 @@ class CreateUsers < ActiveRecord::Migration[8.1]
       t.string :password_digest, null: false
       t.citext :handle
       t.string :name
-      t.string :website
       t.string :bio
+      t.jsonb :social_links, default: {}
       t.timestamps
     end
 

@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   PUBLIC_JSON = {
-    only: [ :id, :name, :handle, :bio, :website, :created_at ],
+    only: [ :id, :name, :handle, :bio, :social_links, :created_at ],
     include: {
       profile_image: {}
     }

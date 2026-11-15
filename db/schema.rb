@@ -218,8 +218,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_14_213016) do
     t.string "password_digest", null: false
     t.citext "handle"
     t.string "name"
-    t.string "website"
     t.string "bio"
+    t.jsonb "social_links", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

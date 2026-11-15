@@ -113,15 +113,6 @@
     white-space: nowrap;
     transform: translateX(0%);
   }
-  h1 {
-    font-size: 1.4rem;
-    font-weight: bold;
-  }
-  h2 {
-    margin-top: 2rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
   .signup-actions {
     display: flex;
     justify-content: flex-start;

@@ -1,8 +1,14 @@
 buhrmi = User.where(handle: "buhrmi").first_or_create!(
   email: "stefan@shitcoinsociety.com",
   password: "password",
-  name: "Stefan Buhrmester",
-  bio: "Better to be wrong about everything than to be right about nothing."
+  name: "Stefan Buhrmester"
+)
+
+buhrmi.update!(
+  bio: "🧑‍💻 Developer of poop-branded investment software.\n❤️ Coconuts and drum n bass.",
+  social_links: {
+    github: "buhrmi"
+  }
 )
 
 unless buhrmi.profile_image.attached?

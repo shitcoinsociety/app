@@ -7,10 +7,10 @@
   <title>Shitcoin Society</title>
 </svelte:head>
 
-<header>
-  <div class="pt-6 supersonic container">
+<header class="container pt-6 pb-2">
+  <a class="supersonic" href="/">
     <h1 class="text-4xl">Shitcoin Society</h1>
-  </div>
+  </a>
 </header>
 
 <main class="container">
@@ -35,7 +35,7 @@
   }
 
   header {
-    /* border-bottom: 1px solid var(--color-border); */
+    border-bottom: 1px solid var(--color-border);
   }
 
   .supersonic {
