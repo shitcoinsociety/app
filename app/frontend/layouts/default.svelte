@@ -50,10 +50,13 @@
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p class="slogan supersonic">Legends never die.</p>
+    <div>
+      &copy; {new Date().getFullYear()} Shitcoin Society.
+      <span class="color-muted">
+        Legends don't die.
+      </span>
+    </div>
     <div class="footer-meta">
-      <span>&copy; {new Date().getFullYear()} Shitcoin Society</span>
-      <span class="footer-divider" aria-hidden="true">&middot;</span>
       <a href="https://youtube.com/@shitcoinsociety" target="_blank" rel="noopener noreferrer">YouTube</a>
       <span class="footer-divider" aria-hidden="true">&middot;</span>
       <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -169,16 +172,6 @@
     padding-block: 2rem;
   }
 
-  .slogan {
-    margin: 0;
-    font-size: clamp(1.75rem);
-    line-height: 1;
-    letter-spacing: 0.015em;
-    background: linear-gradient(90deg, #f8fafc 0%, #c084fc 55%, #6366f1 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
 
   .footer-meta {
     display: flex;

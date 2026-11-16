@@ -12,6 +12,10 @@
   color-scheme: dark;
 }
 
+.color-muted {
+  color: var(--color-muted);
+}
+
 body {
   margin: 0;
 }
