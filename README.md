@@ -2,6 +2,6 @@
 
 # Shitcoin Society
 
-An open-source, crypto-native MLM platform created for modern degenerates like you.
+The open-source, crypto-native investment platform.
 
 [Get Started](https://www.shitcoinsociety.com)

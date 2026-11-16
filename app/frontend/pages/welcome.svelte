@@ -11,7 +11,7 @@
 
 <h2>Welcome to the Shitcoin Society</h2>
 <p>
-  We are a crypto-native <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">open source</a> investment platform developing its very own decentralized ledger technology.
+  We are developing a crypto-native <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">open source</a> investment platform complete with its very own decentralized ledger technology.
   Everybody is welcome to join. We have coconuts and drum n bass.
 </p>
 
