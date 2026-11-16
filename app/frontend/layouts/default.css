@@ -1,21 +1,32 @@
 :root {
   --color-background: #161618;
   --color-text: #ffffff;
-  --color-link: #1e90ff;
+  --color-muted: #a1a1aa;
+  --color-link: #7cc0ff;
   --color-border: #333333;
+  --color-accent: #6366f1;
+  --color-accent-soft: #c084fc;
 
   background-color: var(--color-background);
+  background-image: radial-gradient(circle at 50% -10%, rgb(99 102 241 / 18%), transparent 55%);
+  background-repeat: no-repeat;
   color: var(--color-text);
+  color-scheme: dark;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
 }
 
 #app {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    "header header header"
-    "menu main aside"
-    "footer footer footer";
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
 }
 
 a {
@@ -23,21 +34,28 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
 header {
-  grid-area: header;
+  flex: 0 0 auto;
 }
 
 main {
-  grid-area: main;
+  flex: 1 0 auto;
 }
 
 footer {
-  grid-area: footer;
+  flex: 0 0 auto;
 }
 
 .container {
+  box-sizing: border-box;
+  width: 100%;
   max-width: 800px;
   margin: 0 auto;
+  padding-inline: 1.25rem;
 }
 
 h1 {

@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
 
   use_inertia_instance_props
 
+  inertia_share signedup: -> { params[:signedup].to_s == "true" }
+
   rescue_from ActiveRecord::RecordInvalid do |exception|
     # raise exception unless request.inertia?
     errors = exception.record.errors

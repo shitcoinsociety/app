@@ -3,6 +3,7 @@
 one:
   email: one@example.com
   password_digest: MyString
+  handle: one
 
 two:
   email: two@example.com

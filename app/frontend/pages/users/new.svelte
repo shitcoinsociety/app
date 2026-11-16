@@ -1,12 +1,5 @@
 <script>
-  import { useForm } from 'inertiax-svelte'
-
-  const form = useForm({ email: "" })
-
-  const { 
-    signedup,
-    ico_progress
-  } = $props()
+  const { ico_progress } = $props()
 
   // 1. Discover all installed extensions via EIP-6963
   const wallets = $state([]);
@@ -52,17 +45,6 @@
   <span class="progress-marker" style={`left: ${ico_progress}%`} aria-hidden="true"></span>
   <span class="progress-current" style={`left: ${ico_progress}%`}>{ico_progress}%</span>
 </div>
-
-<h2>Join us - it's free</h2>
-{#if signedup}
-  <p>Thank you for signing up! More info will be on your way soon.</p>
-{:else}
-  <div class="signup-actions">
-    <input type="email" placeholder="Your email address" bind:value={form.email} />
-    <button class="btn" onclick={() => form.post("/users")}>Sign up</button>
-  </div>
-{/if}
-
 
 <style>
   .meter-wrap {
@@ -112,41 +94,5 @@
     font-weight: 700;
     white-space: nowrap;
     transform: translateX(0%);
-  }
-  .signup-actions {
-    display: flex;
-    justify-content: flex-start;
-    gap: 0.75rem;
-    margin-top: 0.5rem;
-  }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-    background-color: #4f46e5;
-    color: white;
-    border: none;
-    border-radius: 0.375rem;
-    cursor: pointer;
-    font: inherit;
-    font-weight: 700;
-  }
-  input {
-    box-sizing: border-box;
-    padding: 0.5rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.375rem;
-    width: 100%;
-    max-width: 320px;
-  }
-
-  @media (max-width: 480px) {
-    .signup-actions {
-      flex-direction: column;
-    }
-    input {
-      max-width: none;
-    }
   }
 </style>
