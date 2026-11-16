@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   def create
     User.create!(user_params)
     flash[:notice] = "Sign up successful!"
-    redirect_to after_signup_path
+    redirect_to new_user_path(signedup: true)
   end
 
   def show
@@ -11,21 +11,10 @@ class UsersController < ApplicationController
   end
 
   def new
-    @ico_progress = 0
+    @signedup = params[:signedup]
   end
 
   private
-
-  def after_signup_path
-    referer = URI.parse(inertia_referer.to_s)
-    path = referer.path.to_s
-    path = root_path unless path.start_with?("/") && !path.start_with?("//", "/\\")
-
-    query = Rack::Utils.parse_nested_query(referer.query)
-    "#{path}?#{query.merge("signedup" => "true").to_query}"
-  rescue URI::InvalidURIError
-    root_path(signedup: true)
-  end
 
   def user_params
     params.require(:user).permit(:email, :password)

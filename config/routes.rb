@@ -15,5 +15,5 @@ Rails.application.routes.draw do
   get "@:handle" => "users#show", as: :user_handle
 
   # Defines the root path route ("/")
-  root "users#new"
+  inertia "/" => "welcome"
 end

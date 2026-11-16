@@ -1,98 +1,122 @@
 <script>
-  const { ico_progress } = $props()
+  import { useForm } from 'inertiax-svelte'
+  
+  const form = useForm({ email: "" })
 
-  // 1. Discover all installed extensions via EIP-6963
-  const wallets = $state([]);
-  if (!import.meta.env.SSR) {
-    window.addEventListener("eip6963:announceProvider", (event) => {
-      wallets.push(event.detail); // { info: { name, icon, rdns }, provider }
-    });
-    window.dispatchEvent(new Event("eip6963:requestProvider"));
+   const { signedup } = $props()
+
+  function handleSubmit(event) {
+    event.preventDefault()
+    form.post("/users", { preserveScroll: true })
   }
-
-  // 2. Connect & request signature when user clicks a wallet
-  async function loginWithWallet(provider) {
-    const [address] = await provider.request({ method: "eth_requestAccounts" });
-    const signature = await provider.request({
-      method: "personal_sign",
-      params: ["Shitcoin Society join request", address],
-    });
-    return { address, signature };
-  }
-
 </script>
 
-<svelte:head>
-  <title>Shitcoin Society</title>
-</svelte:head>
+<section class="signup-section" aria-labelledby="signup-heading">
+  <div class="signup-card">
+    <h2 id="signup-heading">Join us — it's free</h2>
+    {#if signedup}
+      <p class="signup-success">Thank you for signing up! More info will be on your way soon.</p>
+    {:else}
+      <p>Be part of the Shitcoin Society. We'll keep you posted as we count down to the genesis block.</p>
+      <form class="signup-form" onsubmit={handleSubmit}>
+        <input
+          type="email"
+          name="email"
+          placeholder="Your email address"
+          aria-label="Your email address"
+          autocomplete="email"
+          required
+          bind:value={form.email}
+        />
+        <button class="signup-button" type="submit" disabled={form.processing}>
+          {form.processing ? "Signing up…" : "Sign up"}
+        </button>
+      </form>
+      {#if form.errors.email}
+        <p class="signup-error">{form.errors.email}</p>
+      {/if}
+    {/if}
+  </div>
+</section>
 
 
-<img src={"/tothemoon.jpg"} alt="To the moon" class="mt-4" />
+  <style>
+    .signup-section {
+    padding-top: 2.5rem;
+  }
 
-<p class="mt-4">
-  The Shitcoin Society is a crypto-native <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">open source</a> investment platform developing its very own decentralized ledger technology.
-  Everybody is welcome to join. We have coconuts and drum n bass.
-</p>
+  .signup-card {
+    padding: 1.5rem;
+    border: 1px solid rgb(139 92 246 / 35%);
+    border-radius: 1rem;
+    background: linear-gradient(150deg, rgb(99 102 241 / 16%), rgb(192 132 252 / 6%) 55%, transparent);
+    box-shadow: 0 30px 80px -50px rgb(99 102 241 / 90%);
+  }
 
-<h2>Launch progress</h2>
-<p>The genesis block is {ico_progress}% complete.
-  <a href="/genesis.json" target="_blank" rel="noopener noreferrer">Download snapshot</a>
-</p>
-<div class="meter-wrap">
-  <progress class="progress-meter" value={ico_progress} max="100" aria-label="Genesis block completion">
-    {ico_progress}%
-  </progress>
-  <span class="progress-marker" style={`left: ${ico_progress}%`} aria-hidden="true"></span>
-  <span class="progress-current" style={`left: ${ico_progress}%`}>{ico_progress}%</span>
-</div>
+  .signup-card h2 {
+    margin: 0 0 0.5rem;
+  }
 
-<style>
-  .meter-wrap {
-    position: relative;
-    padding-bottom: 2rem;
+  .signup-card p {
+    max-width: 56ch;
+    margin: 0;
+    color: var(--color-muted);
+  }
+
+  .signup-form {
+    display: flex;
+    gap: 0.75rem;
     margin-top: 1rem;
   }
-  .progress-meter {
-    display: block;
-    width: 100%;
-    height: 1.25rem;
-    margin: 0;
-    overflow: hidden;
-    appearance: none;
-    background: #393943;
-    border: 0;
-    border-radius: 999px;
-  }
-  .progress-meter::-webkit-progress-bar {
-    background: #393943;
-    border-radius: 999px;
-  }
-  .progress-meter::-webkit-progress-value {
-    background: linear-gradient(90deg, #6366f1, #c084fc);
-    border-radius: 999px;
-    transition: width 300ms ease;
-  }
-  .progress-meter::-moz-progress-bar {
-    background: linear-gradient(90deg, #6366f1, #c084fc);
-    border-radius: 999px;
-  }
-  .progress-marker {
-    position: absolute;
-    top: 0.625rem;
-    width: 1rem;
-    height: 1rem;
+
+  .signup-form input {
+    flex: 1;
+    min-width: 0;
     box-sizing: border-box;
-    background: white;
-    border: 3px solid #a78bfa;
-    border-radius: 50%;
-    transform: translate(0%, -50%);
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    background: rgb(0 0 0 / 25%);
+    color: var(--color-text);
+    font: inherit;
   }
-  .progress-current {
-    position: absolute;
-    top: 1.75rem;
-    color: #c4b5fd;
+
+  .signup-form input:focus {
+    border-color: transparent;
+    outline: 2px solid var(--color-accent);
+    outline-offset: 1px;
+  }
+
+  .signup-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1.1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-soft));
+    color: white;
+    font: inherit;
     font-weight: 700;
-    white-space: nowrap;
-    transform: translateX(0%);
+    cursor: pointer;
+    transition: filter 150ms ease;
+  }
+
+  .signup-button:hover {
+    filter: brightness(1.1);
+  }
+
+  .signup-button:disabled {
+    cursor: progress;
+    opacity: 0.7;
+  }
+
+  .signup-card .signup-success {
+    color: #86efac;
+  }
+
+  .signup-card .signup-error {
+    margin-top: 0.5rem;
+    color: #fca5a5;
   }
 </style>
