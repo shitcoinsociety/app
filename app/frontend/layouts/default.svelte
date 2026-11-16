@@ -133,7 +133,7 @@
     top: 0;
     z-index: 10;
     border-bottom: 1px solid var(--color-border);
-    background: rgb(22 22 24 / 82%);
+    background: var(--color-background);
     backdrop-filter: blur(10px);
   }
 

@@ -8,15 +8,8 @@
   --color-accent-soft: #c084fc;
 
   background-color: var(--color-background);
-  background-image: radial-gradient(circle at 50% -10%, rgb(99 102 241 / 18%), transparent 55%);
-  background-repeat: no-repeat;
   color: var(--color-text);
   color-scheme: dark;
-}
-
-html,
-body {
-  min-height: 100%;
 }
 
 body {
