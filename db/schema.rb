@@ -217,6 +217,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_14_213016) do
     t.citext "email", null: false
     t.string "password_digest", null: false
     t.citext "handle"
+    t.string "locale", default: "en"
     t.string "name"
     t.string "bio"
     t.jsonb "social_links", default: {}
