@@ -119,4 +119,14 @@
     margin-top: 0.5rem;
     color: #fca5a5;
   }
+
+  @media (max-width: 560px) {
+    .signup-form {
+      flex-direction: column;
+    }
+
+    .signup-button {
+      width: 100%;
+    }
+  }
 </style>

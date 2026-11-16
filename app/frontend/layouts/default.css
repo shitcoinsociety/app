@@ -24,9 +24,25 @@ body {
 }
 
 #app {
-  display: flex;
-  flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer"
+    "nav";
   min-height: 100dvh;
+
+  @media (min-width: 640px) {
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 150px 1fr;
+    grid-template-areas:
+      "header header"
+      "nav main"
+      "footer footer";
+  }
 }
 
 a {
@@ -39,24 +55,21 @@ a:hover {
 }
 
 header {
-  flex: 0 0 auto;
+  grid-area: header;
 }
 
 main {
-  flex: 1 0 auto;
+  grid-area: main;
 }
 
 footer {
-  flex: 0 0 auto;
+  grid-area: footer;
 }
 
-.container {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding-inline: 1.25rem;
+nav {
+  grid-area: nav;
 }
+
 
 h1 {
   font-size: 1.4rem;

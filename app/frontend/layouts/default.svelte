@@ -3,13 +3,20 @@
   import { Frame } from "inertiax-svelte"
 
   const { children } = $props()
+
+  let headerHeight = $state()
+
+  $effect(() => {
+    if (headerHeight === undefined) return
+    document.documentElement.style.setProperty("--header-height", `${headerHeight}px`)
+  })
 </script>
 
 <svelte:head>
   <title>Shitcoin Society</title>
 </svelte:head>
 
-<header class="site-header">
+<header class="site-header" bind:clientHeight={headerHeight}>
   <div class="container header-inner">
     <a class="brand supersonic" href="/">
       <h1 class="text-4xl">Shitcoin Society</h1>
@@ -28,6 +35,19 @@
   </div>
 </main>
 
+<nav>
+  <menu>
+    <li>
+      <a href="/">
+        <span class="i-bitcoin-icons:home-outline text-4xl" aria-hidden="true"></span>
+        <div>
+          Home
+        </div>
+      </a>
+    </li>
+  </menu>
+</nav>
+
 <footer class="site-footer">
   <div class="container footer-inner">
     <p class="slogan supersonic">Legends never die.</p>
@@ -43,6 +63,62 @@
 
 
 <style>
+  nav {
+    position: sticky;
+    bottom: 1rem;
+    width: 100%;
+    menu {
+      margin: 0 auto;
+      width: fit-content;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      border-radius: 99rem;
+      background: rgba(85, 85, 89, 0.22);
+      backdrop-filter: blur(10px);
+      border: 1px solid #9994;
+      padding: 0rem 2rem;
+      a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0.5rem 0.75rem;
+        border-radius: 99rem;
+        font-size: 0.75rem;
+        color: white;
+        text-decoration: none;
+      }
+    }    
+  }
+
+  @media (max-width: 640px) {
+    header, main, footer {
+      padding-inline: 1rem;
+    }
+  }
+  @media (min-width: 640px) {
+    nav {
+      position: sticky;
+      top: var(--header-height);
+      bottom: auto;
+      menu {
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        margin-top: 1rem;
+        a {
+          flex-direction: row;
+          font-size: 1rem;
+          padding: 0.5rem 1rem;
+          gap: 0.5rem;
+        }
+      }
+    }
+  }
+
+
+
   @font-face {
     font-family: "SuperSonic";
     src: url("/fonts/supersonic_rocketship.ttf") format("truetype");
@@ -82,7 +158,6 @@
   .site-footer {
     margin-top: 3rem;
     border-top: 1px solid var(--color-border);
-    background: linear-gradient(180deg, transparent, rgb(99 102 241 / 6%));
   }
 
   .footer-inner {
@@ -116,15 +191,5 @@
 
   .footer-divider {
     color: var(--color-border);
-  }
-
-  @media (max-width: 560px) {
-    .signup-form {
-      flex-direction: column;
-    }
-
-    .signup-button {
-      width: 100%;
-    }
   }
 </style>
