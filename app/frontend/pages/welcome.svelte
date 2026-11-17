@@ -11,7 +11,7 @@
 
 <h2>Welcome to the Shitcoin Society</h2>
 <p>
-  The Shitcoin Society is an upcoming <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">open source</a> investment and trading platform attempting to launch its very own (still unnamed) crypto-currency.
+  The Shitcoin Society is an in-development <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">open source</a> investment and trading community launching its very own (still unnamed) crypto-currency.
   Everybody is welcome to join. We have coconuts and drum n bass.
 </p>
 

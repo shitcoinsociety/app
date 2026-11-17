@@ -34,7 +34,7 @@ body {
 
   @media (min-width: 640px) {
     grid-template-rows: auto 1fr auto;
-    grid-template-columns: 150px 1fr;
+    grid-template-columns: 180px 1fr;
     grid-template-areas:
       "header header"
       "nav main"
@@ -67,6 +67,42 @@ nav {
   grid-area: nav;
 }
 
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-soft));
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: filter 150ms ease, transform 150ms ease;
+}
+
+.btn:hover {
+  filter: brightness(1.1);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent-soft);
+  outline-offset: 2px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: none;
+  transform: none;
+}
 
 h1 {
   font-size: 1.4rem;

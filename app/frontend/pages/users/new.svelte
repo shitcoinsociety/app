@@ -13,11 +13,11 @@
 
 <section class="signup-section" aria-labelledby="signup-heading">
   <div class="signup-card">
-    <h2 id="signup-heading">Join us — it's free</h2>
+    <h2 id="signup-heading">Join us</h2>
     {#if signedup}
       <p class="signup-success">Thank you for signing up! More info will be on your way soon.</p>
     {:else}
-      <p>Join the Shitcoin Society and secure yourself a slot in the genesis block of our very own blockchain.</p>
+      <p>Become a part of the Shitcoin Society and secure yourself a slot in the genesis block.</p>
       <form class="signup-form" onsubmit={handleSubmit}>
         <input
           type="email"
@@ -28,7 +28,7 @@
           required
           bind:value={form.email}
         />
-        <button class="signup-button" type="submit" disabled={form.processing}>
+        <button class="btn" type="submit" disabled={form.processing}>
           {form.processing ? "Signing up…" : "Sign up"}
         </button>
       </form>
@@ -47,10 +47,8 @@
 
   .signup-card {
     padding: 1.5rem;
-    border: 1px solid rgb(139 92 246 / 35%);
-    border-radius: 1rem;
-    background: linear-gradient(150deg, rgb(99 102 241 / 16%), rgb(192 132 252 / 6%) 55%, transparent);
-    box-shadow: 0 30px 80px -50px rgb(99 102 241 / 90%);
+    background: #222121;
+    border-radius: 0.75em;
   }
 
   .signup-card h2 {
@@ -87,29 +85,6 @@
     outline-offset: 1px;
   }
 
-  .signup-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.6rem 1.1rem;
-    border: none;
-    border-radius: 0.5rem;
-    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-soft));
-    color: white;
-    font: inherit;
-    font-weight: 700;
-    cursor: pointer;
-    transition: filter 150ms ease;
-  }
-
-  .signup-button:hover {
-    filter: brightness(1.1);
-  }
-
-  .signup-button:disabled {
-    cursor: progress;
-    opacity: 0.7;
-  }
 
   .signup-card .signup-success {
     color: #86efac;
