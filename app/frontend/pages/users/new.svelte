@@ -17,7 +17,7 @@
     {#if signedup}
       <p class="signup-success">Thank you for signing up! More info will be on your way soon.</p>
     {:else}
-      <p>Be part of the Shitcoin Society. We'll keep you posted as we count down to the genesis block.</p>
+      <p>Join the Shitcoin Society and secure yourself a slot in the genesis block of our very own blockchain.</p>
       <form class="signup-form" onsubmit={handleSubmit}>
         <input
           type="email"
