@@ -53,7 +53,7 @@
     <div>
       &copy; {new Date().getFullYear()} Shitcoin Society.
       <span class="color-muted">
-        Legends don't die.
+        Legends never die.
       </span>
     </div>
     <div class="footer-meta">
