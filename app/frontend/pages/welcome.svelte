@@ -9,7 +9,8 @@
 
 <img src={"/tothemoon.jpg"} alt="To the moon" class="mt-4" />
 
-<h2>Welcome to the Shitcoin Society</h2>
+<h2>Legends never die</h2>
+
 <p>
   The Shitcoin Society is an in-development <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">open source</a> investment and trading community launching its very own (still unnamed) crypto-currency.
   Everybody is welcome to join. We have coconuts and drum n bass.

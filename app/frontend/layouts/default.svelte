@@ -52,9 +52,6 @@
   <div class="container footer-inner">
     <div>
       &copy; {new Date().getFullYear()} Shitcoin Society.
-      <span class="color-muted">
-        Legends never die.
-      </span>
     </div>
     <div class="footer-meta">
       <a href="https://youtube.com/@shitcoinsociety" target="_blank" rel="noopener noreferrer">YouTube</a>
