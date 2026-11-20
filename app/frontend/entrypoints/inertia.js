@@ -1,6 +1,7 @@
 import '@unocss/reset/tailwind.css'
 import 'virtual:uno.css'
 import 'tippy.js/dist/tippy.css'
+import '~/lib/stores.svelte.js'
 
 import { createInertiaApp } from 'inertiax-svelte'
 import Default from '~/layouts/default.svelte'

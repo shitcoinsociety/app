@@ -1,6 +1,6 @@
 /**
- * Decodes a raw `localStorage` value. Values written by `persistent` are JSON,
- * while raw values written by other code (plain strings) read back as-is.
+ * Decodes a raw `localStorage` value, preserving plain strings written by
+ * other code.
  *
  * @param {string | null} raw
  */

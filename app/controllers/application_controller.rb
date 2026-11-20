@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
 
   use_inertia_instance_props
 
-  inertia_share signedup: -> { params[:signedup].to_s == "true" }
+  inertia_share magic_link_sent: -> { params[:magic_link_sent].to_s == "true" },
+                current_user_id: -> { session[:user_id] }
 
   rescue_from ActiveRecord::RecordInvalid do |exception|
     # raise exception unless request.inertia?

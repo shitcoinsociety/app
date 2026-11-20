@@ -1,10 +1,22 @@
-import db from "./dexie.js"
-
 import { liveQuery } from 'dexie'
+import { page } from 'inertiax-svelte'
 import { readable } from 'svelte/store'
+import db from './dexie.js'
 import { persistent } from './persistent.js'
 
-export const currentUserId = persistent('currentUserId')
+const userIdStore = persistent('currentUserId')
+export const currentUserId = { subscribe: userIdStore.subscribe }
+
+if (typeof window !== 'undefined') {
+  $effect.root(() => {
+    $effect(() => {
+      const props = page.props
+      const userId = props.current_user_id
+      if (!Object.hasOwn(props, 'current_user_id')) return
+      userIdStore.set(userId ?? undefined)
+    })
+  })
+}
 
 /**
  * Creates a store that reruns a Dexie query whenever the current user changes.

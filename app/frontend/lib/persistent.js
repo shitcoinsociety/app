@@ -4,11 +4,7 @@ import { decode } from './decode.js'
 const hasStorage = typeof localStorage !== 'undefined'
 
 /**
- * A store whose value follows an entry in `localStorage`, in both directions:
- * `set`/`update` persist to storage, and changes made elsewhere (other tabs,
- * devtools, other code) update the store.
- *
- * Values are stored as JSON so they keep their type across reloads.
+ * A Svelte store backed by a `localStorage` key and synchronized across tabs.
  *
  * @param {string} key
  */
@@ -32,7 +28,6 @@ export function persistent(key) {
   if (hasStorage) {
     window.addEventListener('storage', (event) => {
       if (event.key !== null && event.key !== key) return
-      // `event.key === null` means the whole storage area was cleared.
       setIfChanged(decode(event.key === null ? null : event.newValue))
     })
   }

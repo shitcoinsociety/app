@@ -5,4 +5,9 @@ class UserMailer < ApplicationMailer
     @video_url = WELCOME_VIDEO_URL
     mail to: user.email, subject: "Welcome to Shitcoin Society"
   end
+
+  def magic_login(user, token)
+    @magic_login_url = magic_link_session_url(token: token)
+    mail to: user.email, subject: "Your Shitcoin Society sign-in link"
+  end
 end

@@ -1,19 +1,19 @@
 <script>
-  const { ico_progress = 0, signedup } = $props()
+  const { ico_progress = 0, magic_link_sent } = $props()
   
   import { useForm } from 'inertiax-svelte'
-  import { currentUserId } from "~/lib/stores.svelte.js"
+  import { currentUserId } from '~/lib/stores.svelte.js'
   
-  const form = useForm({ email: "" })
+  const form = useForm({ session: { email: "" } })
 
   function handleSubmit(event) {
     event.preventDefault()
-    form.post("/users", { preserveScroll: true })
+    form.post("/session", { preserveScroll: true })
   }
 </script>
 
 
-<section class="mb-4" aria-labelledby="signup-heading">
+<section class="signup-section mb-4" aria-labelledby="signup-heading">
   <div class="signup-card">
     <h2 id="signup-heading">We're launching our own blockchain</h2>
     <p>The genesis block is {ico_progress}% complete.
@@ -26,10 +26,12 @@
       <span class="progress-marker" style={`left: ${ico_progress}%`} aria-hidden="true"></span>
       <span class="progress-current" style={`left: ${ico_progress}%`}>{ico_progress}%</span>
     </div>
-    {#if signedup}
-      <p class="signup-success">Thank you for signing up! More info will be on your way soon.</p>
+    {#if $currentUserId}
+      <p class="signup-success">You're signed in. <a href="/balances">View your balances</a>.</p>
+    {:else if magic_link_sent}
+      <p class="signup-success">Check your email for a sign-in link. It expires in 15 minutes.</p>
     {:else}
-      <p>Become a part of the Shitcoin Society and secure yourself a slot in the genesis block.</p>
+      <p>Enter your email and we'll send you a sign-in link. If you're new, we'll create your account automatically.</p>
       <form class="signup-form" onsubmit={handleSubmit}>
         <input
           type="email"
@@ -38,10 +40,10 @@
           aria-label="Your email address"
           autocomplete="email"
           required
-          bind:value={form.email}
+          bind:value={form.session.email}
         />
-        <button class="btn" type="submit" disabled={form.processing}>
-          {form.processing ? "Signing up…" : "Sign up"}
+        <button class="btn signup-button" type="submit" disabled={form.processing}>
+          {form.processing ? "Sending…" : "Email me a sign-in link"}
         </button>
       </form>
       {#if form.errors.email}
@@ -66,10 +68,6 @@
 
 
   <style>
-    .signup-section {
-    padding-top: 2.5rem;
-  }
-
   .signup-card {
     padding: 1.5rem;
     background: #222121;

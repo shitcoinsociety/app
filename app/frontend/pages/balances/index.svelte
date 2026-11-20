@@ -7,8 +7,12 @@
 </svelte:head>
 
 <h2>Balances</h2>
-{#each $balances as balance}
-  
+{#if $currentUserId}
+  {#each $balances as balance}
+    
+  {:else}
+    <p>Under construction. Please check back later.</p>
+  {/each}
 {:else}
-  <p>Please sign in to view your balances.</p>
-{/each}
+  <p>Please log in to view your balances.</p>
+{/if}
