@@ -16,22 +16,15 @@
   <title>Shitcoin Society</title>
 </svelte:head>
 
-<header class="site-header" bind:clientHeight={headerHeight}>
-  <div class="container header-inner">
-    <a class="brand supersonic" href="/">
-      <h1 class="text-4xl">Shitcoin Society</h1>
-    </a>
-  </div>
+<header bind:clientHeight={headerHeight}>
+  <a class="brand supersonic" href="/">
+    <h1 class="text-4xl">Shitcoin Society</h1>
+  </a>
 </header>
 
 <main class="container">
   <div class="mt-4">
     {@render children()}
-  </div>
-
-
-  <div scroll-region>
-    <Frame src="/users/new" />
   </div>
 </main>
 
@@ -39,19 +32,30 @@
   <menu>
     <li>
       <a href="/">
-        <span class="i-bitcoin-icons:home-outline text-4xl" aria-hidden="true"></span>
+        <span class="i-bitcoin-icons:rocket-outline text-4xl" aria-hidden="true"></span>
         <div>
-          Home
+          Launch
+        </div>
+      </a>
+    </li>
+        <li>
+      <a href="/balances">
+        <span class="i-bitcoin-icons:bitcoin-outline text-4xl" aria-hidden="true"></span>
+        <div>
+          Balances
         </div>
       </a>
     </li>
   </menu>
 </nav>
 
-<footer class="site-footer">
-  <div class="container footer-inner">
+<footer>
+  <div class="footer-inner">
     <div>
       &copy; {new Date().getFullYear()} Shitcoin Society.
+      <span class="color-muted">
+        Legends never die.
+      </span>
     </div>
     <div class="footer-meta">
       <a href="https://youtube.com/@shitcoinsociety" target="_blank" rel="noopener noreferrer">YouTube</a>
@@ -102,11 +106,13 @@
       top: var(--header-height);
       bottom: auto;
       menu {
+        flex-direction: column;
         background: none;
         border: none;
         padding: 0;
         margin: 0;
         margin-top: 1rem;
+        gap: 0;
         a {
           flex-direction: row;
           font-size: 1rem;
@@ -128,20 +134,17 @@
     font-family: "SuperSonic", sans-serif;
   }
 
-  .site-header {
+  header {
     position: sticky;
     top: 0;
     z-index: 10;
     border-bottom: 1px solid var(--color-border);
     background: var(--color-background);
     backdrop-filter: blur(10px);
+    padding: 1rem;
+    padding-bottom: 0;
   }
 
-  .header-inner {
-    display: flex;
-    align-items: center;
-    padding-block: 1.25rem 0.75rem;
-  }
 
   .brand {
     color: inherit;
@@ -155,9 +158,10 @@
     margin: 0;
   }
 
-  .site-footer {
+  footer {
     margin-top: 3rem;
     border-top: 1px solid var(--color-border);
+    font-size: 0.875rem;
   }
 
   .footer-inner {
@@ -176,7 +180,7 @@
     align-items: center;
     gap: 0.5rem;
     color: var(--color-muted);
-    font-size: 0.875rem;
+  
   }
 
   .footer-divider {

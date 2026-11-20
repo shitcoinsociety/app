@@ -11,9 +11,10 @@ Rails.application.routes.draw do
 
   resources :users
   resource :genesis
+  resources :balances
 
   get "@:handle" => "users#show", as: :user_handle
 
   # Defines the root path route ("/")
-  inertia "/" => "welcome"
+  root "users#new"
 end
