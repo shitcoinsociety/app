@@ -128,6 +128,10 @@ GEM
     debug (1.11.1)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    dexiecable (3.0.0)
+      actioncable (>= 7.0)
+      activerecord (>= 7.0)
+      globalid (>= 0.6)
     drb (2.2.3)
     dry-cli (1.4.1)
     erb (6.0.7)
@@ -463,6 +467,7 @@ DEPENDENCIES
   bundler-audit
   capybara
   debug
+  dexiecable (~> 3.0)
   gibbon (~> 4.1)
   image_processing (~> 1.2)
   inertia_rails (~> 3.23)
@@ -518,6 +523,7 @@ CHECKSUMS
   crass (1.0.8) sha256=7a0145c7a2c59f8e7923b3a69ce819c444823a00a5127d805298fea13be24efe
   date (3.6.0) sha256=18ac945c4e24ebd93534f8eab8c2fd8c5604b3e977105b3798d62a1e8d27b580
   debug (1.11.1) sha256=2e0b0ac6119f2207a6f8ac7d4a73ca8eb4e440f64da0a3136c30343146e952b6
+  dexiecable (3.0.0) sha256=6be63d0bf01301022be16ec723842a324b82a17e976b2a5781ce240a2cf9966e
   drb (2.2.3) sha256=0b00d6fdb50995fe4a45dea13663493c841112e4068656854646f418fda13373
   dry-cli (1.4.1) sha256=b8015bb76c708aa8705a36faf694973e75eeeffca39b89c8e172dc6f66a7d874
   erb (6.0.7) sha256=c5ca6dc25b0ef974a44dc8f59fe847577122483b1968a38dec305c60bf91ee92

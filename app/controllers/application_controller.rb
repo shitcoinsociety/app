@@ -5,7 +5,10 @@ class ApplicationController < ActionController::Base
   use_inertia_instance_props
 
   inertia_share magic_link_sent: -> { params[:magic_link_sent].to_s == "true" },
-                current_user_id: -> { session[:user_id] }
+                current_user_id: -> { session[:user_id] },
+                current_user_token: -> {
+                  current_user && DexieChannel.stream_token_for(current_user)
+                }
 
   rescue_from ActiveRecord::RecordInvalid do |exception|
     # raise exception unless request.inertia?
@@ -33,5 +36,9 @@ class ApplicationController < ActionController::Base
     else
       super(**options)
     end
+  end
+
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
 end

@@ -15,5 +15,6 @@ createInertiaApp({
   layout: () => Default,
   withApp(app, { ssr }) {
     if (ssr) return;
+    import('~/lib/dexiecable.js')
   }
 })

@@ -4,8 +4,7 @@ import { readable } from 'svelte/store'
 import db from './dexie.js'
 import { persistent } from './persistent.js'
 
-const userIdStore = persistent('currentUserId')
-export const currentUserId = { subscribe: userIdStore.subscribe }
+export const currentUserId = persistent('currentUserId')
 
 if (typeof window !== 'undefined') {
   $effect.root(() => {
@@ -13,7 +12,7 @@ if (typeof window !== 'undefined') {
       const props = page.props
       const userId = props.current_user_id
       if (!Object.hasOwn(props, 'current_user_id')) return
-      userIdStore.set(userId ?? undefined)
+      currentUserId.set(userId ?? undefined)
     })
   })
 }
@@ -55,6 +54,10 @@ export function queryWithCurrentUserId(query) {
     }
   })
 }
+
+export const currentUser = queryWithCurrentUserId((id) =>
+  db.users.where("id").equals(id).first()
+)
 
 export const balances = queryWithCurrentUserId((id) =>
   db.balances.where('user_id').equals(id).toArray()

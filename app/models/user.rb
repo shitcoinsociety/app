@@ -10,6 +10,13 @@ class User < ApplicationRecord
     }
   }
 
+  PRIVATE_JSON = {
+    only: PUBLIC_JSON[:only] + [ :email ],
+    include: {
+      profile_image: {}
+    }
+  }
+
   has_secure_password
 
   has_one_attached :profile_image
@@ -25,6 +32,13 @@ class User < ApplicationRecord
 
     user = find_by(login_token_digest: Digest::SHA256.hexdigest(token))
     user if user&.consume_login_token(token)
+  end
+
+  syncs_to_dexie
+
+  subscribed_to do |client|
+    # backfill data after subscribing with dexiecable
+    client.table("users").put(as_json(User::PRIVATE_JSON))
   end
 
   def issue_login_token!

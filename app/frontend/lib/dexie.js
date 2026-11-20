@@ -7,4 +7,6 @@ db.version(1).stores({
   balances: "id, user_id, asset_id",
 })
 
+
+
 export default db

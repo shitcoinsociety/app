@@ -63,3 +63,5 @@ gem "gibbon", "~> 4.1"
 gem "letter_opener", "~> 1.10"
 
 gem "mailgun-ruby", "~> 1.4"
+
+gem "dexiecable", "~> 3.0"
