@@ -1,8 +1,7 @@
 class Asset < ApplicationRecord
   JSON_OPTIONS = {
     only: [
-      :id, :name, :symbol, :contract_address, :network_id,
-      :description, :holders_count, :trades_count
+      :id, :name, :symbol, :contract_address, :network_id, :description
     ],
     include: {
       icon: {}

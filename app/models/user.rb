@@ -27,6 +27,9 @@ class User < ApplicationRecord
 
   after_create_commit :save_in_mailchimp
   after_create_commit :send_welcome_email
+
+  after_create :create_btc_balance
+
   before_validation :ensure_password, on: :create
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -76,6 +79,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def create_btc_balance
+    balances.find_or_create_by!(asset: Asset.find_by(symbol: "BTC"))
+  end
 
   def ensure_password
     self.password ||= SecureRandom.hex(16)

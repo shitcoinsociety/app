@@ -52,8 +52,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_21_031000) do
     t.citext "symbol"
     t.integer "decimals"
     t.decimal "total_supply", precision: 36, scale: 18
-    t.integer "holders_count", default: 0
-    t.integer "trades_count", default: 0
     t.jsonb "metadata"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -63,10 +61,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_21_031000) do
   end
 
   create_table "balances", force: :cascade do |t|
-    t.decimal "amount"
+    t.decimal "amount", precision: 36, scale: 18, default: "0.0"
     t.integer "asset_id"
     t.integer "user_id"
-    t.decimal "locked"
+    t.decimal "locked", precision: 36, scale: 18, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -277,12 +275,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_21_031000) do
     t.string "name"
     t.string "bio"
     t.jsonb "social_links", default: {}
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "login_token_digest"
     t.datetime "login_token_expires_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["handle"], name: "index_users_on_handle", unique: true
+    t.index ["login_token_digest"], name: "index_users_on_login_token_digest", unique: true, where: "(login_token_digest IS NOT NULL)"
   end
 
   create_table "wallets", force: :cascade do |t|

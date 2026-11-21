@@ -21,10 +21,11 @@ if (typeof window !== 'undefined') {
  * Creates a store that reruns a Dexie query whenever the current user changes.
  *
  * @template T
- * @param {(userId: string | number) => T} query
+ * @param {T} initialValue
+ * @param {(userId: string | number) => T | PromiseLike<T>} query
  */
-export function queryWithCurrentUserId(query) {
-  return readable([], (set) => {
+export function queryWithCurrentUserId(initialValue, query) {
+  return readable(initialValue, (set) => {
     let querySubscription
     let queryVersion = 0
 
@@ -32,7 +33,7 @@ export function queryWithCurrentUserId(query) {
       const version = ++queryVersion
       querySubscription?.unsubscribe()
       querySubscription = undefined
-      set([])
+      set(initialValue)
 
       if (userId == null || typeof indexedDB === 'undefined') return
 
@@ -55,11 +56,13 @@ export function queryWithCurrentUserId(query) {
   })
 }
 
-export const currentUser = queryWithCurrentUserId((id) =>
-  db.users.where("id").equals(id).first()
+export const currentUser = queryWithCurrentUserId(
+  null,
+  async (id) => (await db.users.where('id').equals(id).first()) ?? null
 )
 
-export const balances = queryWithCurrentUserId((id) =>
-  db.balances.where('user_id').equals(id).toArray()
+export const balances = queryWithCurrentUserId(
+  [],
+  (id) => db.balances.where('user_id').equals(id).toArray()
 )
 

@@ -9,9 +9,9 @@
 <h2>Balances</h2>
 {#if $currentUserId}
   {#each $balances as balance}
-    
+    <p>{balance.asset.symbol}: {balance.amount}</p>
   {:else}
-    <p>Under construction. Please check back later.</p>
+    <p>Loading...</p>
   {/each}
 {:else}
   <p>Please log in to view your balances.</p>

@@ -1,8 +1,9 @@
 <script>
   import "./default.css"
-  import { Frame } from "inertiax-svelte"
-
+  
   const { children } = $props()
+
+  import { currentUser } from '~/lib/stores.svelte.js'
 
   let headerHeight = $state()
 
@@ -46,6 +47,16 @@
         </div>
       </a>
     </li>
+    {#if $currentUser}
+    <li>
+      <a href="/session" data-method="delete">
+        <span class="i-bitcoin-icons:log-out-outline text-4xl" aria-hidden="true"></span>
+        <div>
+          Log out
+        </div>
+      </a>
+    </li>
+    {/if}
   </menu>
 </nav>
 

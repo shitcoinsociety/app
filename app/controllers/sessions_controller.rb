@@ -8,6 +8,11 @@ class SessionsController < ApplicationController
     redirect_to new_user_path(magic_link_sent: true), status: :see_other
   end
 
+  def destroy
+    reset_session
+    redirect_to root_path, status: :see_other, notice: "You are now signed out."
+  end
+
   def magic_link
     user = User.consume_login_token(params[:token])
     if user
