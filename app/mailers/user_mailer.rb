@@ -10,4 +10,9 @@ class UserMailer < ApplicationMailer
     @magic_login_url = magic_link_session_url(token: token)
     mail to: user.email, subject: "Your Shitcoin Society sign-in link"
   end
+
+  def deposit_created(deposit)
+    @deposit = deposit
+    mail to: deposit.user.email, subject: "Deposit received"
+  end
 end

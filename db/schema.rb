@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_20_021415) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_21_031000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -43,11 +43,58 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_021415) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "assets", force: :cascade do |t|
+    t.bigint "network_id"
+    t.string "type", default: "Asset"
+    t.string "description"
+    t.string "contract_address"
+    t.string "name"
+    t.citext "symbol"
+    t.integer "decimals"
+    t.decimal "total_supply", precision: 36, scale: 18
+    t.integer "holders_count", default: 0
+    t.integer "trades_count", default: 0
+    t.jsonb "metadata"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contract_address"], name: "index_assets_on_contract_address"
+    t.index ["network_id"], name: "index_assets_on_network_id"
+    t.index ["symbol"], name: "index_assets_on_symbol"
+  end
+
   create_table "balances", force: :cascade do |t|
     t.decimal "amount"
     t.integer "asset_id"
     t.integer "user_id"
     t.decimal "locked"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "deposits", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "asset_id", null: false
+    t.bigint "wallet_id", null: false
+    t.string "tx", null: false
+    t.integer "tx_idx", null: false
+    t.decimal "amount", precision: 36, scale: 18, null: false
+    t.integer "block_height"
+    t.integer "confirmations", default: 0, null: false
+    t.datetime "credited_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_id"], name: "index_deposits_on_asset_id"
+    t.index ["user_id"], name: "index_deposits_on_user_id"
+    t.index ["wallet_id", "tx", "tx_idx"], name: "index_deposits_on_wallet_id_and_tx_and_tx_idx", unique: true
+    t.index ["wallet_id"], name: "index_deposits_on_wallet_id"
+  end
+
+  create_table "networks", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "type", null: false
+    t.integer "last_scanned_height"
+    t.boolean "enabled", default: true, null: false
+    t.jsonb "config", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -238,8 +285,24 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_021415) do
     t.index ["handle"], name: "index_users_on_handle", unique: true
   end
 
+  create_table "wallets", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "asset_id", null: false
+    t.string "address"
+    t.integer "sequential_id"
+    t.string "path"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_id"], name: "index_wallets_on_asset_id"
+    t.index ["user_id"], name: "index_wallets_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "assets", "networks"
+  add_foreign_key "deposits", "assets"
+  add_foreign_key "deposits", "users"
+  add_foreign_key "deposits", "wallets"
   add_foreign_key "solid_queue_batch_executions", "solid_queue_batches", column: "batch_id", on_delete: :cascade
   add_foreign_key "solid_queue_batch_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
@@ -248,4 +311,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_20_021415) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "wallets", "assets"
+  add_foreign_key "wallets", "users"
 end

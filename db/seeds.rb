@@ -1,6 +1,5 @@
 buhrmi = User.where(handle: "buhrmi").first_or_create!(
   email: "stefan@shitcoinsociety.com",
-  password: "password",
   name: "Stefan Buhrmester"
 )
 
@@ -17,4 +16,11 @@ unless buhrmi.profile_image.attached?
     filename: "buhrmi.jpg",
     content_type: "image/jpeg"
   )
+end
+
+%w[
+  networks
+  assets
+].each do |seed|
+  load Rails.root.join("db/seeds/#{seed}.rb")
 end

@@ -21,6 +21,10 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
+  has_many :wallets, dependent: :destroy
+  has_many :balances, dependent: :destroy
+  has_many :deposits, dependent: :destroy
+
   after_create_commit :save_in_mailchimp
   after_create_commit :send_welcome_email
   before_validation :ensure_password, on: :create
@@ -39,6 +43,8 @@ class User < ApplicationRecord
   subscribed_to do |client|
     # backfill data after subscribing with dexiecable
     client.table("users").put(as_json(User::PRIVATE_JSON))
+    client.table("balances").bulkPut(balances.includes(:asset).map(&:as_json_for_dexie))
+    client.table("deposits").bulkPut(deposits.includes(:asset).map(&:as_json_for_dexie))
   end
 
   def issue_login_token!

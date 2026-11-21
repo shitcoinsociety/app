@@ -1,0 +1,103 @@
+class Network::Bitcoin < Network
+  # bitcoinrb keeps the chain params in a global, and they have to be in place both while
+  # the key is parsed and while the address is encoded.
+  def derive_address(user_id, index)
+    with_chain_params { hd_root.derive(user_id).derive(index).addr }
+  end
+
+  def tip_height
+    rpc.getblockcount
+  end
+
+  # Kept per instance so one scan reuses a single client; assigning one is also how tests
+  # stub the network.
+  attr_writer :rpc
+
+  def rpc
+    @rpc ||= Rpc.new(rpc_url)
+  end
+
+  private
+
+  def scan_block(height, report)
+    transactions = block_at(height)["tx"].to_a
+    report[:transactions] += transactions.size
+
+    transactions.each do |tx|
+      tx["vout"].each_with_index do |output, index|
+        # A UTXO belongs to one address, and an address to one wallet.
+        wallet = wallets_by_address[address_of(output)]&.first
+        next unless wallet
+
+        created = record_deposit(
+          tx: tx["txid"], tx_idx: index, wallet: wallet,
+          amount: wallet.asset.amount_from(output["value"]), height: height
+        )
+        report[:created] += 1 if created
+      end
+    end
+  end
+
+  def block_at(height)
+    rpc.getblock(rpc.getblockhash(height), 2)
+  end
+
+  def address_of(vout)
+    script = vout["scriptPubKey"] || {}
+    [ script["address"], *script["addresses"] ].compact.first
+  end
+
+  # bitcoinrb keeps the chain params in a global, and the key's version bytes decide which
+  # chain it belongs to, so they are applied around the parsing and derivation that read them.
+  def with_chain_params
+    ::Bitcoin.chain_params = chain.to_sym
+    yield
+  end
+
+  # Parsed lazily and remembered: the key's version bytes are matched against the chain
+  # params, so this only works inside #with_chain_params.
+  def hd_root
+    @hd_root ||= ::Bitcoin::ExtPubkey.from_base58(xpub)
+  end
+
+  # Minimal JSON-RPC client for the handful of calls a scan makes.
+  #
+  # bitcoinrb ships one, but it subclasses JSON::Pure::Parser (which json_pure
+  # 3 no longer defines), defines its methods by calling `help` on the node when
+  # it is constructed, and sets no timeouts - none of which suits a public
+  # endpoint that is expected to be slow or briefly unavailable. The timeout such an
+  # endpoint needs comes from Network::Rpc; what is left here is JSON-RPC's own shape.
+  class Rpc < Network::Rpc
+    def getblockcount
+      call("getblockcount")
+    end
+
+    def getblockhash(height)
+      call("getblockhash", height)
+    end
+
+    def getblock(hash, verbosity = 2)
+      call("getblock", hash, verbosity)
+    end
+
+    private
+
+    def call(method, *params)
+      response = connect(request_for(method, params))
+
+      raise "#{method} failed: HTTP #{response.code}" unless response.is_a?(Net::HTTPSuccess)
+
+      payload = JSON.parse(response.body)
+      raise "#{method} failed: #{payload['error']}" if payload["error"]
+
+      payload["result"]
+    end
+
+    def request_for(method, params)
+      request = Net::HTTP::Post.new(uri, "content-type" => "application/json")
+      request.basic_auth(uri.user, uri.password) if uri.user
+      request.body = JSON.generate(jsonrpc: "1.0", id: method, method: method, params: params)
+      request
+    end
+  end
+end
