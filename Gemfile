@@ -48,6 +48,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
+  gem "cuprite"
   gem "selenium-webdriver"
   # Use the Puma web server [https://github.com/puma/puma]
   gem "puma", ">= 5.0"

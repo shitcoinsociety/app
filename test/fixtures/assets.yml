@@ -1,0 +1,5 @@
+bitcoin:
+  network: bitcoin
+  type: Asset::Bitcoin
+  name: Bitcoin
+  symbol: BTC

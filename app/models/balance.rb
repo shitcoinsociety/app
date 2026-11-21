@@ -10,6 +10,8 @@ class Balance < ApplicationRecord
   belongs_to :asset
   validates :amount, numericality: { greater_than_or_equal_to: 0 }
 
+  syncs_to_dexie via: :user
+
   def self.credit!(user, asset, delta)
     balance = user.balances.find_or_initialize_by(asset: asset)
     balance.amount = (balance.amount || 0) + delta

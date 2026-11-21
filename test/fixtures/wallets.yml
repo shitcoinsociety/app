@@ -1,0 +1,5 @@
+bitcoin:
+  user: one
+  asset: bitcoin
+  address: our-bitcoin-address
+  sequential_id: 1

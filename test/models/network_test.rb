@@ -1,8 +1,6 @@
 require "test_helper"
 
 class NetworkTest < ActiveSupport::TestCase
-  self.fixture_table_names = []
-
   BitcoinRpc = Struct.new(:block) do
     def getblockcount
       100
@@ -18,12 +16,10 @@ class NetworkTest < ActiveSupport::TestCase
   end
 
   test "bitcoin scan records a deposit to a controlled wallet" do
-    network = Network::Bitcoin.create!(name: "Bitcoin", last_scanned_height: 99)
-    asset = Asset::Bitcoin.create!(network: network, name: "Bitcoin", symbol: "BTC")
-    user = User.create!(email: "depositor@example.com")
-    wallet = Wallet.new(user: user, asset: asset)
-    wallet.define_singleton_method(:generate_address) { self.address = "our-address" }
-    wallet.save!
+    network = networks(:bitcoin)
+    asset = assets(:bitcoin)
+    user = users(:one)
+    wallet = wallets(:bitcoin)
 
     block = {
       "tx" => [ {
