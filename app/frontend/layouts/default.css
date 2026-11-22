@@ -20,6 +20,13 @@ body {
   margin: 0;
 }
 
+.card {
+  padding: 1.5rem;
+  background: #222121;
+  border-radius: 0.75em;
+}
+
+
 #app {
   max-width: 800px;
   margin: 0 auto;
@@ -75,13 +82,13 @@ nav {
   padding: 0.5em 1em;
   border: none;
   border-radius: 0.5rem;
-  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-soft));
   color: var(--color-text);
   font: inherit;
   font-weight: 600;
   line-height: 1;
   cursor: pointer;
   transition: filter 150ms ease, transform 150ms ease;
+  background-color: var(--color-accent);
 }
 
 .btn:hover {

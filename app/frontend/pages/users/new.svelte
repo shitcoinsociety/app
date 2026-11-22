@@ -14,7 +14,7 @@
 
 
 <section class="signup-section mb-4" aria-labelledby="signup-heading">
-  <div class="signup-card">
+  <div class="card">
     <h2 id="signup-heading">We're launching our own blockchain</h2>
     <p>The genesis block is {ico_progress}% complete.
       <a href="/genesis.json" target="_blank" rel="noopener noreferrer">Download snapshot</a>
@@ -68,17 +68,12 @@
 
 
   <style>
-  .signup-card {
-    padding: 1.5rem;
-    background: #222121;
-    border-radius: 0.75em;
-  }
 
-  .signup-card h2 {
+  .card h2 {
     margin: 0 0 0.5rem;
   }
 
-  .signup-card p {
+  .card p {
     max-width: 56ch;
     margin: 0;
     color: var(--color-muted);
@@ -109,11 +104,11 @@
   }
 
 
-  .signup-card .signup-success {
+  .card .signup-success {
     color: #86efac;
   }
 
-  .signup-card .signup-error {
+  .card .signup-error {
     margin-top: 0.5rem;
     color: #fca5a5;
   }

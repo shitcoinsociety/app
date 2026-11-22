@@ -1,4 +1,5 @@
 <script>
+  import {Modal} from "~/lib/ui";
   import "./default.css"
   
   const { children } = $props()
@@ -75,7 +76,7 @@
     </div>
   </div>
 </footer>
-
+<Modal />
 
 <style>
   nav {
@@ -148,7 +149,7 @@
   header {
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 1;
     border-bottom: 1px solid var(--color-border);
     background: var(--color-background);
     backdrop-filter: blur(10px);
