@@ -1,5 +1,5 @@
 <script>
-  const { ico_progress = 0, magic_link_sent } = $props()
+  const { user_count, ico_progress = 0, magic_link_sent } = $props()
   
   import { useForm } from 'inertiax-svelte'
   import { currentUserId } from '~/lib/stores.svelte.js'
@@ -14,24 +14,13 @@
 
 
 <section class="signup-section mb-4" aria-labelledby="signup-heading">
-  <div class="card">
-    <h2 id="signup-heading">We're launching our own blockchain</h2>
-    <p>The genesis block is {ico_progress}% complete.
-      <a href="/genesis.json" target="_blank" rel="noopener noreferrer">Download snapshot</a>
-    </p>
-    <div class="meter-wrap">
-      <progress class="progress-meter" value={ico_progress} max="100" aria-label="Genesis block completion">
-        {ico_progress}%
-      </progress>
-      <span class="progress-marker" style={`left: ${ico_progress}%`} aria-hidden="true"></span>
-      <span class="progress-current" style={`left: ${ico_progress}%`}>{ico_progress}%</span>
-    </div>
-    {#if $currentUserId}
+  <h2>The new era of financial degeneracy is imminent</h2>
+  <p>Join {user_count} degens launching their very own blockchain</p>
+   {#if $currentUserId}
       <p class="signup-success">You're signed in. <a href="/balances">View your balances</a>.</p>
     {:else if magic_link_sent}
       <p class="signup-success">Check your email for a sign-in link. It expires in 15 minutes.</p>
     {:else}
-      <p>Enter your email and we'll send you a sign-in link. If you're new, we'll create your account automatically.</p>
       <form class="signup-form" onsubmit={handleSubmit}>
         <input
           type="email"
@@ -43,25 +32,39 @@
           bind:value={form.session.email}
         />
         <button class="btn signup-button" type="submit" disabled={form.processing}>
-          {form.processing ? "Sending…" : "Email me a sign-in link"}
+          {form.processing ? "Sending…" : "Send link"}
         </button>
       </form>
       {#if form.errors.email}
         <p class="signup-error">{form.errors.email}</p>
       {/if}
     {/if}
+  <div class="card mt-8">
+    <h2 id="signup-heading">🚀 Launch status</h2>
+    <p>The genesis block is {ico_progress}% complete.
+      <a href="/genesis.json" target="_blank" rel="noopener noreferrer">Download snapshot</a>
+    </p>
+    <div class="meter-wrap">
+      <progress class="progress-meter" value={ico_progress} max="100" aria-label="Genesis block completion">
+        {ico_progress}%
+      </progress>
+      <span class="progress-marker" style={`left: ${ico_progress}%`} aria-hidden="true"></span>
+      <span class="progress-current" style={`left: ${ico_progress}%`}>{ico_progress}%</span>
+    </div>
+   
   </div>
 </section>
 
-
-<h2>About the Shitcoin Society</h2>
-
-<p>
-  The Shitcoin Society is an in-development <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">open source</a> investment and trading community launching its very own (still unnamed) blockchain.
-  Everybody is welcome to join. We have coconuts and drum n bass.
-</p>
-
-<img src={"/tothemoon.jpg"} alt="To the moon" class="mt-4" />
+<section>  
+  <h2>About the Shitcoin Society</h2>
+  
+  <p>
+    The Shitcoin Society is an in-development <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">open source</a> investment and trading community launching its very own (still unnamed) blockchain.
+    Everybody is welcome to join. We have coconuts and drum n bass.
+  </p>
+  
+  <img src={"/tothemoon.jpg"} alt="To the moon" class="mt-4" />
+</section>
 
 
 
@@ -76,7 +79,6 @@
   .card p {
     max-width: 56ch;
     margin: 0;
-    color: var(--color-muted);
   }
 
   .signup-form {
@@ -104,11 +106,11 @@
   }
 
 
-  .card .signup-success {
+  .signup-success {
     color: #86efac;
   }
 
-  .card .signup-error {
+  .signup-error {
     margin-top: 0.5rem;
     color: #fca5a5;
   }

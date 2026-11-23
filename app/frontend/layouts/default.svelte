@@ -62,19 +62,22 @@
 </nav>
 
 <footer>
-  <div class="footer-inner">
-    <div>
-      &copy; {new Date().getFullYear()} Shitcoin Society.
-      <span class="color-muted">
-        Legends never die.
-      </span>
+  <section>
+
+    <div class="footer-inner">
+      <div>
+        &copy; {new Date().getFullYear()} Shitcoin Society.
+        <span class="color-muted">
+          Legends never die.
+        </span>
+      </div>
+      <div class="footer-meta">
+        <a href="https://youtube.com/@shitcoinsociety" target="_blank" rel="noopener noreferrer">YouTube</a>
+        <span class="footer-divider" aria-hidden="true">&middot;</span>
+        <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
     </div>
-    <div class="footer-meta">
-      <a href="https://youtube.com/@shitcoinsociety" target="_blank" rel="noopener noreferrer">YouTube</a>
-      <span class="footer-divider" aria-hidden="true">&middot;</span>
-      <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">GitHub</a>
-    </div>
-  </div>
+  </section>
 </footer>
 <Modal />
 
@@ -107,11 +110,6 @@
     }    
   }
 
-  @media (max-width: 640px) {
-    header, main, footer {
-      padding-inline: 1rem;
-    }
-  }
   @media (min-width: 640px) {
     nav {
       position: sticky;

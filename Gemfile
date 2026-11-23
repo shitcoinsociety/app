@@ -68,4 +68,5 @@ gem "mailgun-ruby", "~> 1.4"
 gem "dexiecable", "~> 3.0"
 
 gem "sequenced", "~> 4.0"
-gem "bitcoinrb", "~> 1.7"
+gem "observer"
+gem "bitcoinrb",  require: "bitcoin"

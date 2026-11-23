@@ -56,23 +56,26 @@
   {@const bottom = index == 0 && !children}
   {@const top = index === stack.length - 1}
   <div class="pane" class:top transition:fly={{ x: bottom ? 0 : 200, duration: 300 }}>
-    <nav>
+    <nav class="start">
       <button class="back" onclick={back} aria-label="Back">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
-        </svg>
-        <span>Back</span>
+        <div class="i-bitcoin-icons:arrow-left-outline text-2xl"></div>
+        <!-- <span>Back</span> -->
       </button>
     </nav>
-    <main>
+
       <Frame restore {close} {onClickLink} {...props}>
         <div class="spinner"></div>
       </Frame>
-    </main>
   </div>
 {/each}
 
 <style>
+  :global {
+    nav {
+      text-align: center;
+      padding: var(--padding);
+    }
+  }
   .pane {
     position: absolute;
     inset: 0;
@@ -81,8 +84,8 @@
     grid-template-areas: "nav" "main";
     transition: all 0.3s ease-out;
     isolation: isolate;
-    background: var(--ivs-surface, #0d0d13);
     opacity: 1;
+    display: grid;
   }
 
   .pane:not(.top) {
@@ -95,18 +98,7 @@
     justify-content: flex-start;
     gap: 0.5rem;
     padding: 1rem;
-    margin: 0;
-    border: 0;
-    background: none;
-    color: inherit;
-    font: inherit;
-    cursor: pointer;
-  }
-
-  .back svg {
-    width: 1.5rem;
-    height: 1.5rem;
-    fill: currentColor;
+    margin: calc(var(--padding) * -1);
   }
 
   .spinner {

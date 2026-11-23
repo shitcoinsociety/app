@@ -41,9 +41,10 @@
     transition: transform 400ms cubic-bezier(0.215, 0.61, 0.355, 1),
       visibility 400ms;
 
-    background-color: var(--ivs-surface, #0d0d13);
-    border: 1px solid var(--ivs-border-color, var(--color-border, #d5d5dd22));
+    background-color: var(--color-background);
+    /* backdrop-filter: blur(10px); */
     overflow: hidden;
+    border: 1px solid #222;
     display: grid;
   }
 
@@ -55,7 +56,7 @@
 
   @media (min-width: 640px) {
     .blur {
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(6px);
       position: fixed;
       inset: 0;
       z-index: 99;

@@ -5,5 +5,6 @@ class UsersController < ApplicationController
   end
 
   def new
+    @user_count = User.count
   end
 end
