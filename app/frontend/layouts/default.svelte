@@ -20,7 +20,7 @@
 
 <header bind:clientHeight={headerHeight}>
   <a class="brand supersonic" href="/">
-    <h1 class="text-4xl">Shitcoin Society</h1>
+    <h1 class="text-3xl pb-1">Shitcoin Society</h1>
   </a>
 </header>
 
@@ -36,7 +36,7 @@
       <a href="/">
         <span class="i-bitcoin-icons:rocket-outline text-4xl" aria-hidden="true"></span>
         <div>
-          Launch
+          Home
         </div>
       </a>
     </li>

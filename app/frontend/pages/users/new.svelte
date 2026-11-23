@@ -14,10 +14,10 @@
 
 
 <section class="signup-section mb-4" aria-labelledby="signup-heading">
-  <h2>The new era of financial degeneracy is imminent</h2>
-  <p>Join {user_count} degens launching their very own blockchain</p>
+  <p class="text-center mb-4">The new era of financial degeneracy is upon us</p>
+  <h2 class="text-center text-3xl mb-4">Join {user_count} degens launching their very own blockchain</h2>
    {#if $currentUserId}
-      <p class="signup-success">You're signed in. <a href="/balances">View your balances</a>.</p>
+      <p class="signup-success text-center">You're signed in. <a href="/balances">View your balances</a>.</p>
     {:else if magic_link_sent}
       <p class="signup-success">Check your email for a sign-in link. It expires in 15 minutes.</p>
     {:else}
