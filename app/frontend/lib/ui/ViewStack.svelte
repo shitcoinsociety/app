@@ -71,7 +71,7 @@
 
 <style>
   :global {
-    nav {
+    .pane nav {
       text-align: center;
       padding: var(--padding);
     }
