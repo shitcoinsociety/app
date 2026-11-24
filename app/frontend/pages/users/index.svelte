@@ -4,6 +4,13 @@
   const { users } = $props()
 </script>
 
+<sections>
+  <a href="/">
+  
+    
+  </a>
+</sections>
+
 <section>
   <h2>Meet our degens</h2>
   <p class="mb-4">An almanac of fame and honor</p>

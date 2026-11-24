@@ -90,6 +90,12 @@ class User < ApplicationRecord
   end
 
   def ensure_name_and_handle
+    if id.nil? && (name.nil? || handle.nil?)
+      self.id = self.class.connection.select_value(
+        "SELECT nextval(pg_get_serial_sequence('users', 'id'))"
+      )
+    end
+
     self.name ||= "Degen ##{id}"
     self.handle ||= "degen-#{id}"
   end
