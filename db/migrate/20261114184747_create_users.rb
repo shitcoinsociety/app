@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration[8.1]
       t.citext :handle
       t.string :locale, default: "en"
       t.string :name
-      t.string :bio
+      t.string :description
       t.jsonb :social_links, default: {}
       t.string :login_token_digest
       t.datetime :login_token_expires_at

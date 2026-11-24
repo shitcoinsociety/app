@@ -22,6 +22,13 @@ export default defineConfig({
         }),
         presetWind4()
       ],
+      // Icon classes are resolved at runtime from ~/lib/social-links.js.
+      safelist: [
+        "i-simple-icons:github",
+        "i-simple-icons:facebook",
+        "i-simple-icons:instagram",
+        "i-simple-icons:x"
+      ]
     }),
     inertia({
       ssr: {

@@ -14,8 +14,8 @@
 
 
 <section class="signup-section mb-4" aria-labelledby="signup-heading">
-  <p class="text-center mb-4">The new era of financial degeneracy is upon us</p>
-  <h2 class="text-center text-3xl mb-4">Join {user_count} degens launching their very own blockchain</h2>
+  <p class="text-center mb-4">The era of financial degeneracy is upon us</p>
+  <h2 class="text-center text-3xl mb-4">Join <a href="/users">{user_count} other degens</a> on their quest to launch their very own blockchain.</h2>
    {#if $currentUserId}
       <p class="signup-success text-center">You're signed in. <a href="/balances">View your balances</a>.</p>
     {:else if magic_link_sent}
@@ -59,7 +59,7 @@
   <h2>About the Shitcoin Society</h2>
   
   <p>
-    The Shitcoin Society is an in-development <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">open source</a> investment and trading community launching its very own (still unnamed) blockchain.
+    The Shitcoin Society is an in-development <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">open source</a> investment and trading app launching its very own (still unnamed) blockchain.
     Everybody is welcome to join. We have coconuts and drum n bass.
   </p>
   

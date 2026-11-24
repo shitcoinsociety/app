@@ -273,7 +273,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_21_031000) do
     t.citext "handle"
     t.string "locale", default: "en"
     t.string "name"
-    t.string "bio"
+    t.string "description"
     t.jsonb "social_links", default: {}
     t.string "login_token_digest"
     t.datetime "login_token_expires_at"

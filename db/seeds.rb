@@ -11,7 +11,7 @@ buhrmi = User.where(handle: "buhrmi").first_or_create!(
 )
 
 buhrmi.update!(
-  bio: "🧑‍💻 Developer of poop-branded investment software.\n❤️ Coconuts and drum n bass.",
+  description: "Lead Developer & Investor",
   social_links: {
     github: "buhrmi"
   }

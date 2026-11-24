@@ -1,23 +1,9 @@
 <script>
+  import { socialLinksFor } from "~/lib/social-links.js";
+
   const { user } = $props();
 
-  const socialNetworks = {
-    github: { label: "GitHub", icon: "i-simple-icons-github", url: (handle) => `https://github.com/${handle}` },
-    facebook: { label: "Facebook", icon: "i-simple-icons-facebook", url: (handle) => `https://facebook.com/${handle}` },
-    instagram: { label: "Instagram", icon: "i-simple-icons-instagram", url: (handle) => `https://instagram.com/${handle}` },
-    x: { label: "X", icon: "i-simple-icons-x", url: (handle) => `https://x.com/${handle}` }
-  };
-
-  const socialLinks = $derived(
-    Object.entries(user.social_links ?? {})
-      .filter(([key, value]) => socialNetworks[key] && value)
-      .map(([key, value]) => {
-        const { label, icon, url } = socialNetworks[key];
-        const href = /^https?:\/\//i.test(value) ? value : url(value);
-
-        return { key, label, icon, href };
-      })
-  );
+  const socialLinks = $derived(socialLinksFor(user));
 
   function nl2br(text) {
     if (!text) return "";
@@ -37,16 +23,17 @@
   <title>{user.handle} ({user.name})</title>
 </svelte:head>
 
-<div class="flex">
-  <img src={user.profile_image.url} alt={user.name} class="profile_image" />
-  <div class="relative">
-    <h1 class="text-3xl">{user.name}</h1>
-    <p>{@html nl2br(user.bio)}</p>
-    {#if socialLinks.length}
+<section>
+  <div class="flex">
+    <img src={user.profile_image.url} alt={user.name} class="profile_image" />
+    <div class="relative">
+      <h1 class="text-3xl">{user.name}</h1>
+      <p>{@html nl2br(user.description)}</p>
+      {#if socialLinks.length}
       <ul class="social-links">
         {#each socialLinks as link (link.key)}
-          <li>
-            <a
+        <li>
+          <a
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
@@ -56,19 +43,20 @@
               {link.label}
             </a>
           </li>
-        {/each}
-      </ul>
-    {/if}
+          {/each}
+        </ul>
+      {/if}
+    </div>
   </div>
-</div>
+</section>
 
-<h2>
-  Invest Together with {user.name}
-</h2>
-
-<p>
+<section>
+<p class="mt-4">
   This page is still under construction. Check back later.
 </p>
+
+
+</section>
 
 <style>
   .social-links {

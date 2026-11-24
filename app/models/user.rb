@@ -4,7 +4,7 @@ class User < ApplicationRecord
   LOGIN_TOKEN_TTL = 15.minutes
 
   PUBLIC_JSON = {
-    only: [ :id, :name, :handle, :bio, :social_links, :created_at ],
+    only: [ :id, :name, :handle, :description, :social_links, :created_at ],
     include: {
       profile_image: {}
     }
@@ -31,6 +31,7 @@ class User < ApplicationRecord
   after_create :create_btc_balance
 
   before_validation :ensure_password, on: :create
+  before_validation :ensure_name_and_handle
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
@@ -86,6 +87,11 @@ class User < ApplicationRecord
 
   def ensure_password
     self.password ||= SecureRandom.hex(16)
+  end
+
+  def ensure_name_and_handle
+    self.name ||= "Degen ##{id}"
+    self.handle ||= "degen-#{id}"
   end
 
   def send_welcome_email
