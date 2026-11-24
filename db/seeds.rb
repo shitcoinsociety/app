@@ -11,7 +11,7 @@ buhrmi = User.where(handle: "buhrmi").first_or_create!(
 )
 
 buhrmi.update!(
-  description: "Lead Developer & Investor",
+  description: "Lead Developer & Degen #1",
   social_links: {
     github: "buhrmi"
   }

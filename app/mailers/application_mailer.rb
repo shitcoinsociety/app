@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "Stefan from the Shitcoin Society <stefan@shitcoinsociety.com>"
+  default from: "Degen #1 <stefan@shitcoinsociety.com>"
   layout "mailer"
 end
