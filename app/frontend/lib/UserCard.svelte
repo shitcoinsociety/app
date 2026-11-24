@@ -49,7 +49,7 @@
     display: grid;
     place-items: center;
     background: var(--color-accent);
-    color: var(--color-text);
+    color: var(--color-on-accent);
     font-size: 1.5rem;
     font-weight: bold;
   }

@@ -146,12 +146,12 @@
     border-radius: 999px;
   }
   .progress-meter::-webkit-progress-value {
-    background: linear-gradient(90deg, #6366f1, #c084fc);
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-soft));
     border-radius: 999px;
     transition: width 300ms ease;
   }
   .progress-meter::-moz-progress-bar {
-    background: linear-gradient(90deg, #6366f1, #c084fc);
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-soft));
     border-radius: 999px;
   }
   .progress-marker {
@@ -161,14 +161,14 @@
     height: 1rem;
     box-sizing: border-box;
     background: white;
-    border: 3px solid #a78bfa;
+    border: 3px solid var(--color-accent);
     border-radius: 50%;
     transform: translate(0%, -50%);
   }
   .progress-current {
     position: absolute;
     top: 1.25rem;
-    color: #c4b5fd;
+    color: var(--color-accent-soft);
     font-weight: 700;
     white-space: nowrap;
     transform: translateX(0%);

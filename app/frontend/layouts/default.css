@@ -2,10 +2,11 @@
   --color-background: #161618;
   --color-text: #ffffff;
   --color-muted: #a1a1aa;
-  --color-link: #7cc0ff;
+  --color-link: #c084fc;
   --color-border: #333333;
-  --color-accent: #6366f1;
-  --color-accent-soft: #c084fc;
+  --color-accent: #9c5fda;
+  --color-accent-soft: #e9d5ff;
+  --color-on-accent: #ffffff;
   --padding: 1rem;
 
   background-color: var(--color-background);
@@ -107,7 +108,7 @@ section {
   padding: 0.5em 1em;
   border: none;
   border-radius: 0.5rem;
-  color: var(--color-text);
+  color: var(--color-on-accent);
   font: inherit;
   font-weight: 600;
   line-height: 1;
