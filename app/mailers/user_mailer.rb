@@ -3,7 +3,9 @@ class UserMailer < ApplicationMailer
 
   def welcome(user)
     @video_url = WELCOME_VIDEO_URL
-    mail to: user.email, subject: "Welcome to the new era of financial degeneracy"
+    mail to: user.email,
+      subject: "Welcome to the Shitcoin Society",
+      from: "Stefan Buhrmester <stefan@shitcoinsociety.com>"
   end
 
   def magic_login(user, token)
