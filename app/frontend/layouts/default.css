@@ -28,7 +28,7 @@
 body {
   margin: 0;
 }
-body:has(.stack) {
+body:has(.stack .pane) {
   overflow: hidden;
 }
 

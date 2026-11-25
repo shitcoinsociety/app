@@ -117,7 +117,7 @@
     nav {
       position: sticky;
       top: var(--header-height);
-      height: calc(100vh - var(--header-height));
+      max-height: calc(100vh - var(--header-height));
       bottom: auto;
 
       menu {
