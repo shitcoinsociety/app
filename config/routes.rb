@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resource :genesis
   resources :balances
   resources :deposits
+  resources :withdrawals
 
   get "@:handle" => "users#show", as: :user_handle
 

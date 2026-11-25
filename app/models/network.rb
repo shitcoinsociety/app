@@ -133,13 +133,15 @@ class Network < ApplicationRecord
   # Recounted from the block it came in, so a payment keeps gaining confirmations after
   # its block was scanned.
   #
-  # Scoped by asset id instead of through the association: update_all on a joined
-  # relation aliases the target table, which makes the recounted columns ambiguous in
-  # Postgres.
   def refresh_confirmations
-    Deposit.where(asset: assets).pending.where.not(block_height: nil)
+    deposits = Deposit.where(asset: assets).pending.where.not(block_height: nil)
       .where("confirmations <> ? - block_height + 1", @tip_height)
-      .update_all([ "confirmations = ? - block_height + 1", @tip_height ])
+    count = 0
+    deposits.find_each do |deposit|
+      deposit.update!(confirmations: confirmations_for(deposit.block_height))
+      count += 1
+    end
+    count
   end
 
   # Every wallet we control on this chain, by address, loaded once per scan. One address

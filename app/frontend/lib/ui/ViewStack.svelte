@@ -74,6 +74,8 @@
     .pane nav {
       text-align: center;
       padding: var(--padding);
+      position: sticky;
+      top: 0;
     }
   }
   .pane {

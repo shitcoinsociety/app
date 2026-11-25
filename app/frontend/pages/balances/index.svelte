@@ -1,7 +1,8 @@
 <script>
-  import { balances, currentUserId, deposits } from '~/lib/stores.svelte.js'
+  import { balances, currentUser, deposits } from '~/lib/stores.svelte.js'
   import { formatDate } from '~/lib/utils.js'
   import { modal } from '~/lib/ui'
+  import DepositAmount from '~/lib/DepositAmount.svelte'
 
   const depositsByAsset = $derived.by(() => {
     const grouped = {}
@@ -19,29 +20,37 @@
 </svelte:head>
 
 <section>
-  {#if $currentUserId}
+  {#if $currentUser}
   {#each $balances as balance}
-    <div class="balance pt-4">
+    <div class="balance pt-8">
       <p class="text-center">{balance.asset.name}</p>
       <p class="text-center text-4xl font-bold">{balance.amount}</p>
-      <div class="flex mt-8 p-6">
+      <div class="flex mt-8 p-6 justify-center gap-8">
         <a class="inline-flex flex-col items-center" href="/deposits/new?asset_id={balance.asset.id}" use:modal>
           <div class="btn round">
             <div class="i-bitcoin-icons:receive-outline text-4xl"></div>
           </div>
           <div class="color-text text-sm mt-1">Deposit</div>
         </a>
+        <a class="inline-flex flex-col items-center" href="/withdrawals/new?asset_id={balance.asset.id}" use:modal>
+          <div class="btn round">
+            <div class="i-bitcoin-icons:send-outline text-4xl"></div>
+          </div>
+          <div class="color-text text-sm mt-1">Send</div>
+        </a>
       </div>
     </div>
-    <div class="card mt-4">
+    <div class="card mt-4 flex flex-col gap-4">
       {#each depositsByAsset[balance.asset.id] ?? [] as deposit}
         <a href="/deposits/{deposit.id}" use:modal class="flex color-text items-center gap-4">
-          <img src={deposit.asset.icon.url} class="h-10"/>
+          {#if deposit.asset.icon?.url}
+            <img src={deposit.asset.icon.url} class="h-10" alt="" />
+          {/if}
           <div class="grow">
             <p>{deposit.asset.name}</p>
             <p class="color-muted">{formatDate(deposit.created_at)}</p>
           </div>
-          <p class="text-green">+{deposit.amount}</p>
+          <p class="text-green text-right"><DepositAmount {deposit} /></p>
         </a>
       {:else}
         No recent activity.

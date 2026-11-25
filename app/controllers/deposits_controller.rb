@@ -9,5 +9,7 @@ class DepositsController < ApplicationController
   def show
     deposit = current_user.deposits.find(params[:id])
     @deposit = deposit.as_json(Deposit::PRIVATE_JSON)
+    @wallet = deposit.wallet.as_json(Wallet::JSON_OPTIONS)
+    @confirmations_needed = Deposit::CONFIRMATIONS_NEEDED
   end
 end

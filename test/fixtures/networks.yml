@@ -2,3 +2,5 @@ bitcoin:
   name: Bitcoin
   type: Network::Bitcoin
   last_scanned_height: 99
+  config:
+    explorer_url: "https://example.com/tx/%{tx}"

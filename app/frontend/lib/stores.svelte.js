@@ -68,6 +68,6 @@ export const balances = queryWithCurrentUserId(
 
 export const deposits = queryWithCurrentUserId(
   [],
-  (id) => db.deposits.where('user_id').equals(id).toArray()
+  (id) => db.deposits.where('user_id').equals(id).reverse().toArray()
 )
 

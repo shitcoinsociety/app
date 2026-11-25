@@ -28,6 +28,9 @@
 body {
   margin: 0;
 }
+body:has(.stack) {
+  overflow: hidden;
+}
 
 .card {
   padding: 1.5rem;

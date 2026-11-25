@@ -51,6 +51,9 @@ class DepositBalanceTest < ApplicationSystemTestCase
     assert_nil deposit.credited_at
     assert_equal 0, @user.balances.find_by!(asset: @asset).amount
     assert_selector ".balance", text: "0.0"
+    assert_selector ".deposit-amount.pending", text: "+0.125", wait: 10
+    find('[aria-label="Awaiting network confirmations"]').hover
+    assert_selector '[role="tooltip"]', text: "Awaiting network confirmations"
 
     @rpc.height = 101
     @network.scan_deposits
@@ -58,6 +61,11 @@ class DepositBalanceTest < ApplicationSystemTestCase
     assert deposit.reload.credited_at?
     assert_equal BigDecimal("0.125"), @user.balances.find_by!(asset: @asset).amount
     assert_selector ".balance", text: "0.125", wait: 10
+    assert_selector ".deposit-amount:not(.pending)", text: "+0.125", wait: 10
+    assert_no_selector '[aria-label="Awaiting network confirmations"]'
+    visit balances_path
+    assert_selector ".deposit-amount:not(.pending)", text: "+0.125", wait: 20
+    assert_no_selector '[aria-label="Awaiting network confirmations"]'
   end
 
   test "a new bitcoin deposit appears in recent activity without reloading" do
@@ -70,8 +78,35 @@ class DepositBalanceTest < ApplicationSystemTestCase
 
     @network.scan_deposits
 
-    assert_selector ".card", text: "0.125 Bitcoin", wait: 10
+    assert_selector ".card", text: "+0.125", wait: 10
     assert_no_selector ".card", text: "No recent activity."
     assert page.evaluate_script("window.depositTestPage")
+  end
+
+  test "a pending deposit shows its status in the details" do
+    @network.scan_deposits
+    deposit = Deposit.find_by!(wallet: @wallet, tx: "deposit-transaction")
+
+    visit magic_link_session_path(token: @user.issue_login_token!)
+    assert_link "Log out", wait: 20
+    visit deposit_path(deposit)
+
+    assert_selector ".deposit-amount.pending", text: "+0.125"
+    assert_selector "dt", text: "Transaction hash"
+    assert_selector "dd", text: deposit.tx
+    assert_selector "dt", text: "Confirmations", exact_text: true
+    assert_selector "dt", text: "Required confirmations"
+    assert_selector "dt", text: "Receiving wallet address"
+    assert_selector "dd", text: @wallet.address
+    assert_selector "dd.confirmations", text: "1", exact_text: true
+    assert_selector "dd.required-confirmations", text: Deposit::CONFIRMATIONS_NEEDED.to_s, exact_text: true
+    page.execute_script("document.querySelector('[aria-label=\"Awaiting network confirmations\"]').focus()")
+    assert_selector '[role="tooltip"]', text: "Awaiting network confirmations"
+
+    @rpc.height = 101
+    @network.scan_deposits
+    assert_selector ".deposit-amount:not(.pending)", text: "+0.125", wait: 10
+    assert_selector "dd.confirmations", text: "2", exact_text: true, wait: 10
+    assert_no_selector '[aria-label="Awaiting network confirmations"]'
   end
 end

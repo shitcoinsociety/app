@@ -10,4 +10,11 @@ Deposit.transaction do
     record.confirmations = Deposit::CONFIRMATIONS_NEEDED
   end
   deposit.credit!
+
+  Deposit.find_or_create_by!(wallet: wallet, tx: "development-seed-pending-deposit", tx_idx: 0) do |record|
+    record.user = user
+    record.asset = asset
+    record.amount = BigDecimal("0.05")
+    record.confirmations = 0
+  end
 end
