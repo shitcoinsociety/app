@@ -12,7 +12,7 @@
     <p class="color-muted">{formatDate(deposit.created_at)}</p>
   </div>
   <div class="card mt-4">
-    <a href={deposit.asset.network.explorer_url.replace("%{address}", deposit.tx)} target="_blank" class="color-muted">
+    <a href={deposit.asset.network.explorer_url.replace("%{tx}", deposit.tx)} target="_blank" class="color-muted">
       View on explorer
     </a>
   </div>
