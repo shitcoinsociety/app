@@ -115,6 +115,7 @@
       position: sticky;
       top: var(--header-height);
       bottom: auto;
+      border-right: 1px solid var(--color-border);
       menu {
         flex-direction: column;
         background: none;
@@ -169,7 +170,6 @@
   }
 
   footer {
-    margin-top: 3rem;
     border-top: 1px solid var(--color-border);
     font-size: 0.875rem;
   }
@@ -180,7 +180,6 @@
     align-items: flex-end;
     justify-content: space-between;
     gap: 1.5rem;
-    padding-block: 2rem;
   }
 
 

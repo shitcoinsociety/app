@@ -24,3 +24,5 @@ unless buhrmi.profile_image.attached?
     content_type: "image/jpeg"
   )
 end
+
+load Rails.root.join("db/seeds/development.rb") if Rails.env.development?

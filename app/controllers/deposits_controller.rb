@@ -5,4 +5,9 @@ class DepositsController < ApplicationController
     @wallet = wallet.as_json
     @asset = asset.as_json
   end
+
+  def show
+    deposit = current_user.deposits.find(params[:id])
+    @deposit = deposit.as_json(Deposit::PRIVATE_JSON)
+  end
 end

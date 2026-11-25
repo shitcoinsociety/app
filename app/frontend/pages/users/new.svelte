@@ -14,8 +14,9 @@
 
 
 <section class="signup-section mb-4" aria-labelledby="signup-heading">
+  <img src={"/rocket.svg"} alt="To the moon" class="mb-4 w-20 inline-block mx-auto pt-10" />
   <p class="text-center mb-4">The era of financial degeneracy is upon us</p>
-  <h2 class="text-center text-3xl mb-4">Join <a href="/users">{user_count} other degens</a> on their quest to launch their very own blockchain.</h2>
+  <h2 class="text-center text-3xl mb-4">Join <a href="/users">{user_count} degens</a> on their quest to launch their very own blockchain.</h2>
    {#if $currentUserId}
       <p class="signup-success text-center">You're signed in. <a href="/balances">View your balances</a>.</p>
     {:else if magic_link_sent}
@@ -39,7 +40,7 @@
         <p class="signup-error">{form.errors.email}</p>
       {/if}
     {/if}
-  <div class="card mt-8">
+  <div class="card mt-16">
     <h2 id="signup-heading">🚀 Launch status</h2>
     <p>The genesis block is {ico_progress}% complete.
       <a href="/genesis.json" target="_blank" rel="noopener noreferrer">Download snapshot</a>

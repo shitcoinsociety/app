@@ -2,6 +2,11 @@
 # which is why anything chain-wide - configuration, RPC access, the height we
 # have scanned up to - lives here instead of on the assets.
 class Network < ApplicationRecord
+  JSON_OPTIONS = {
+    only: [],
+    methods: [ :explorer_url ]
+  }
+
   # A development machine and its node are both only up now and then, so the cursor is
   # often thousands of blocks behind the tip and catching up is minutes of nothing to
   # watch. A scan in development therefore never reaches back further than this.

@@ -66,3 +66,8 @@ export const balances = queryWithCurrentUserId(
   (id) => db.balances.where('user_id').equals(id).toArray()
 )
 
+export const deposits = queryWithCurrentUserId(
+  [],
+  (id) => db.deposits.where('user_id').equals(id).toArray()
+)
+

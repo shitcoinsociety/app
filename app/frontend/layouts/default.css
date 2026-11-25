@@ -12,10 +12,17 @@
   background-color: var(--color-background);
   color: var(--color-text);
   color-scheme: dark;
+  @media (min-width: 640px) {
+    --padding: 2rem;
+  }
 }
 
 .color-muted {
   color: var(--color-muted);
+}
+
+.color-text {
+  color: var(--color-text);
 }
 
 body {
@@ -25,7 +32,7 @@ body {
 .card {
   padding: 1.5rem;
   background: #222121;
-  border-radius: 0.75em;
+  border-radius: 1.5rem;
 }
 
 
@@ -43,7 +50,7 @@ body {
 
   @media (min-width: 640px) {
     grid-template-rows: auto 1fr auto;
-    grid-template-columns: 180px 1fr;
+    grid-template-columns: 220px 1fr;
     grid-template-areas:
       "header header"
       "nav main"

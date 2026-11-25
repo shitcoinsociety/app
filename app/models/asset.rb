@@ -4,7 +4,8 @@ class Asset < ApplicationRecord
       :id, :name, :symbol, :contract_address, :network_id, :description
     ],
     include: {
-      icon: {}
+      icon: {},
+      network: Network::JSON_OPTIONS
     }
   }
 

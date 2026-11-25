@@ -1,6 +1,6 @@
 class Deposit < ApplicationRecord
-  JSON_OPTIONS = {
-    only: [ :id, :user_id, :asset_id, :wallet_id, :amount, :confirmations ],
+  PRIVATE_JSON = {
+    only: [ :id, :user_id, :asset_id, :wallet_id, :amount, :confirmations, :created_at, :tx ],
     methods: [ :confirmed? ],
     include: {
       asset: Asset::JSON_OPTIONS
@@ -22,7 +22,7 @@ class Deposit < ApplicationRecord
   syncs_to_dexie via: :user
 
   def as_json_for_dexie
-    as_json(JSON_OPTIONS)
+    as_json(PRIVATE_JSON)
   end
 
   # Deposits that are still counting up.

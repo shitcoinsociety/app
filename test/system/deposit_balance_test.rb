@@ -42,20 +42,36 @@ class DepositBalanceTest < ApplicationSystemTestCase
     visit magic_link_session_path(token: @user.issue_login_token!)
     assert_link "Log out", wait: 20
     visit balances_path
-    assert_text "BTC: 0.0", wait: 20
+    assert_selector ".balance", text: "Bitcoin", wait: 20
+    assert_selector ".balance", text: "0.0"
 
     @network.scan_deposits
     deposit = Deposit.find_by!(wallet: @wallet, tx: "deposit-transaction")
     assert_equal 1, deposit.confirmations
     assert_nil deposit.credited_at
     assert_equal 0, @user.balances.find_by!(asset: @asset).amount
-    assert_text "BTC: 0.0"
+    assert_selector ".balance", text: "0.0"
 
     @rpc.height = 101
     @network.scan_deposits
 
     assert deposit.reload.credited_at?
     assert_equal BigDecimal("0.125"), @user.balances.find_by!(asset: @asset).amount
-    assert_text "BTC: 0.125", wait: 10
+    assert_selector ".balance", text: "0.125", wait: 10
+  end
+
+  test "a new bitcoin deposit appears in recent activity without reloading" do
+    visit magic_link_session_path(token: @user.issue_login_token!)
+    assert_link "Log out", wait: 20
+    visit balances_path
+    assert_selector ".balance", text: "Bitcoin", wait: 20
+    assert_selector ".card", text: "No recent activity."
+    page.execute_script("window.depositTestPage = true")
+
+    @network.scan_deposits
+
+    assert_selector ".card", text: "0.125 Bitcoin", wait: 10
+    assert_no_selector ".card", text: "No recent activity."
+    assert page.evaluate_script("window.depositTestPage")
   end
 end
