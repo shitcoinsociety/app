@@ -111,11 +111,15 @@
   }
 
   @media (min-width: 640px) {
+    main {
+      border-left: 1px solid var(--color-border);
+    }
     nav {
       position: sticky;
       top: var(--header-height);
+      height: calc(100vh - var(--header-height));
       bottom: auto;
-      border-right: 1px solid var(--color-border);
+
       menu {
         flex-direction: column;
         background: none;
