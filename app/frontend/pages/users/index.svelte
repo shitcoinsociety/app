@@ -1,7 +1,9 @@
 <script>
   import UserCard from '~/lib/UserCard.svelte'
+  import { Link } from 'inertiax-svelte'
 
-  const { users } = $props()
+  const { users, next_cursor, user_count } = $props()
+  let loading = $state(false)
 </script>
 
 <section>
@@ -17,10 +19,29 @@
     <li>
       <a class="card signup-card" href="/users/new">
         <span class="i-lucide:plus signup-card-plus" aria-hidden="true"></span>
-        <span>Sign up to become degen #{users.length + 1}</span>
+        <span>Sign up to become degen #{user_count + 1}</span>
       </a>
     </li>
   </ul>
+
+  {#if next_cursor}
+    <div class="load-more">
+      <Link
+        as="button"
+        class="btn"
+        href={`/users?after=${next_cursor}`}
+        only={['users', 'next_cursor', 'user_count']}
+        preserveScroll
+        preserveState
+        preserveUrl
+        disabled={loading}
+        onstart={() => loading = true}
+        onfinish={() => loading = false}
+      >
+        {loading ? 'Loading…' : 'Load more'}
+      </Link>
+    </div>
+  {/if}
 </section>
 
 <style>
@@ -64,5 +85,10 @@
 
   .signup-card-plus {
     font-size: 2rem;
+  }
+
+  .load-more {
+    margin-top: 1.5rem;
+    text-align: center;
   }
 </style>
