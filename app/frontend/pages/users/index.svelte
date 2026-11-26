@@ -7,8 +7,8 @@
 </script>
 
 <section>
-  <h2>Meet our degens</h2>
-  <p class="mb-4">An almanac of fame and honor</p>
+  <h2>The almanac of honor</h2>
+  <p class="mb-4">Meet the degens of the Shitcoin Society</p>
 
   <ul class="user-grid">
     {#each users as user (user.id)}

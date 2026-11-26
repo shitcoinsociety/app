@@ -60,8 +60,7 @@
   <h2>About the Shitcoin Society</h2>
   
   <p>
-    The Shitcoin Society is an in-development <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">open source</a> investment and trading app launching its very own (still unnamed) blockchain.
-    Everybody is welcome to join. We have coconuts and drum n bass.
+    The Shitcoin Society is an <a href="https://github.com/shitcoinsociety" target="_blank" rel="noopener noreferrer">open source</a> crypto investment platform and trading engine.
   </p>
   
   <img src={"/tothemoon.jpg"} alt="To the moon" class="mt-4" />
