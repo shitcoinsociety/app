@@ -2,6 +2,6 @@
 
 # Shitcoin Society
 
-The open-source, crypto-native investment platform.
+The open source crypto investment platform with built-in trading engine.
 
 [Get Started](https://www.shitcoinsociety.com)

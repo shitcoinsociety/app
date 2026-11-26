@@ -11,9 +11,10 @@ buhrmi = User.where(handle: "buhrmi").first_or_create!(
 )
 
 buhrmi.update!(
-  description: "Lead Developer & Degen #1",
+  description: "Bass music connoisseur",
   social_links: {
-    github: "buhrmi"
+    github: "buhrmi",
+    website: "https://ftb.asia/artists/buhrmi"
   }
 )
 

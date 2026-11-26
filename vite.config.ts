@@ -27,7 +27,8 @@ export default defineConfig({
         "i-simple-icons:github",
         "i-simple-icons:facebook",
         "i-simple-icons:instagram",
-        "i-simple-icons:x"
+        "i-simple-icons:x",
+        "i-lucide:globe"
       ]
     }),
     inertia({
